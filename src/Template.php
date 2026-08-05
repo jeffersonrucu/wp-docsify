@@ -18,6 +18,27 @@ class Template {
     private function filters(): void {
         add_filter( 'page_template', [ $this, 'renderTemplate' ] );
         add_filter( 'theme_page_templates', [ $this, 'includeTemplate' ], 10, 4 );
+
+        // Registered here, not in renderTemplate: WordPress decides about the
+        // admin bar on template_redirect, before the page template is resolved.
+        add_filter( 'show_admin_bar', [ $this, 'hideAdminBar' ] );
+    }
+
+    /**
+     * The documentation page drops the theme styles, and the admin bar is one of
+     * their casualties: its markup still prints from wp_footer, unstyled, as a
+     * long bare list over the documentation. It also has nowhere to sit, since
+     * docsify pins its own layout to the top of the viewport.
+     *
+     * @param mixed $show
+     * @return mixed
+     */
+    public function hideAdminBar( $show ) {
+        return $this->isDocsPage() ? false : $show;
+    }
+
+    private function isDocsPage(): bool {
+        return get_page_template_slug() === 'template-docsify-docs.php';
     }
 
     /**
@@ -33,11 +54,13 @@ class Template {
     }
 
     public function renderTemplate( string $page_template ): string {
-        if ( get_page_template_slug() !== 'template-docsify-docs.php' ) {
+        if ( ! $this->isDocsPage() ) {
             return $page_template;
         }
 
         add_action( 'wp_enqueue_scripts', [ $this, 'isolateStyles' ], PHP_INT_MAX );
+
+        $this->optOutOfOptimization();
 
         $access = Access::check();
 
@@ -51,6 +74,30 @@ class Template {
         }
 
         return DOCSIFYDOCS_DIR . 'src/templates/docsify-docs.php';
+    }
+
+    /**
+     * Keeps caching and optimization plugins away from the documentation page.
+     *
+     * Docsify has to run at load: it reads window.$docsify, then fetches and
+     * renders the Markdown. Deferring or reordering those scripts, which is what
+     * "delay JavaScript execution" does by rewriting every script tag to a type
+     * the browser will not run, leaves the page blank. Concatenating them breaks
+     * the plugin order docsify depends on, and caching the result would serve a
+     * restricted page to whoever asks for it next.
+     *
+     * These constants are the convention WP Rocket, W3 Total Cache, LiteSpeed
+     * Cache and others check before touching a response.
+     */
+    private function optOutOfOptimization(): void {
+        foreach ( [ 'DONOTCACHEPAGE', 'DONOTROCKETOPTIMIZE', 'DONOTMINIFY', 'DONOTCACHEOBJECT', 'DONOTASYNCCSS' ] as $constant ) {
+            if ( ! defined( $constant ) ) {
+                define( $constant, true );
+            }
+        }
+
+        // LiteSpeed reads its own filter rather than a constant.
+        add_filter( 'litespeed_control_set_nocache', '__return_true' );
     }
 
     /**

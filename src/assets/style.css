@@ -20,6 +20,16 @@ a:hover {
     cursor: pointer !important;
 }
 
+/**
+ * docsify hides every non-anchor child of a collapsed item, which assumes the
+ * group heading is a link. A heading written as plain text renders as
+ * .group-title and gets hidden too, so collapsing a section erases it from the
+ * menu and leaves no way to reopen it. Keep the heading, hide only the list.
+ */
+.sidebar-nav li.collapse > .group-title {
+    display: block;
+}
+
 /* BEM - docsify-docs */
 
 /* Reset global */
