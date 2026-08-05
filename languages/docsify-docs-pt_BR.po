@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Docsify Docs 3.0.0\n"
+"Project-Id-Version: Docsify Docs 3.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/docsify-docs\n"
 "Language-Team: Brazilian Portuguese\n"
 "Language: pt_BR\n"
@@ -216,3 +216,37 @@ msgstr "Não foi possível atualizar a URL da página."
 #: src/Admin.php
 msgid "Ideal size: horizontal image of 240×40 px (use 480×80 px for retina displays). It is scaled down to fit 40 px tall, keeping its proportions."
 msgstr "Tamanho ideal: imagem horizontal de 240×40 px (use 480×80 px para telas retina). Ela é reduzida para caber em 40 px de altura, mantendo a proporção."
+
+#: src/Admin.php
+msgid "Protect Files"
+msgstr "Proteger arquivos"
+
+#: src/Admin.php
+msgid "Serve the .md files through WordPress so the rule above also applies to them"
+msgstr "Servir os arquivos .md pelo WordPress para que a regra acima também valha para eles"
+
+#: src/Admin.php
+msgid "Docsify fetches every file over the network. Without this, the .md files stay readable by direct URL even while the page is restricted."
+msgstr "O Docsify busca cada arquivo pela rede. Sem isso, os arquivos .md continuam legíveis por URL direta mesmo com a página restrita."
+
+#. translators: %s: link to the permalink settings screen
+#: src/Admin.php
+msgid "Inactive: the endpoint needs pretty permalinks. Pick any option other than Plain in %s."
+msgstr "Inativo: o endpoint precisa de links permanentes amigáveis. Escolha qualquer opção diferente de Simples em %s."
+
+#: src/Admin.php
+msgid "Settings > Permalinks"
+msgstr "Configurações > Links permanentes"
+
+#. translators: %s: PHP constant name
+#: src/Admin.php
+msgid "Define %s in wp-config.php to keep them somewhere else, such as a folder versioned with your project."
+msgstr "Defina %s no wp-config.php para mantê-los em outro lugar, como uma pasta versionada junto com o projeto."
+
+#: src/FileServer.php
+msgid "You are not allowed to read this documentation."
+msgstr "Você não tem permissão para ler esta documentação."
+
+#: src/FileServer.php
+msgid "Documentation file not found."
+msgstr "Arquivo de documentação não encontrado."

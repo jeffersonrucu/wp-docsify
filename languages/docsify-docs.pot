@@ -2,7 +2,7 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Docsify Docs 3.0.0\n"
+"Project-Id-Version: Docsify Docs 3.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/docsify-docs\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -247,4 +247,38 @@ msgstr ""
 
 #: src/templates/docsify-docs.php:53
 msgid "No results found"
+msgstr ""
+
+#: src/Admin.php:87
+msgid "Protect Files"
+msgstr ""
+
+#: src/Admin.php:158
+msgid "Serve the .md files through WordPress so the rule above also applies to them"
+msgstr ""
+
+#: src/Admin.php:161
+msgid "Docsify fetches every file over the network. Without this, the .md files stay readable by direct URL even while the page is restricted."
+msgstr ""
+
+#. translators: %s: link to the permalink settings screen
+#: src/Admin.php:170
+msgid "Inactive: the endpoint needs pretty permalinks. Pick any option other than Plain in %s."
+msgstr ""
+
+#: src/Admin.php:172
+msgid "Settings > Permalinks"
+msgstr ""
+
+#. translators: %s: PHP constant name
+#: src/Admin.php:275
+msgid "Define %s in wp-config.php to keep them somewhere else, such as a folder versioned with your project."
+msgstr ""
+
+#: src/FileServer.php:183
+msgid "You are not allowed to read this documentation."
+msgstr ""
+
+#: src/FileServer.php:184
+msgid "Documentation file not found."
 msgstr ""
