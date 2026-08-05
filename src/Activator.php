@@ -14,6 +14,9 @@ class Activator {
 
         self::setDefaultOptions();
         self::copySampleDocs();
+        self::registerRoutes();
+
+        ( new Hardening() )->sync();
     }
 
     private static function setDefaultOptions(): void {
@@ -21,6 +24,7 @@ class Activator {
             add_option( 'docsify_docs_options', [
                 'is_restricted' => DOCSIFYDOCS_DEFAULT_IS_RESTRICTED,
                 'allowed_roles' => DOCSIFYDOCS_DEFAULT_ALLOWED_ROLES,
+                'protect_files' => DOCSIFYDOCS_DEFAULT_PROTECT_FILES,
                 'logo_id'       => 0,
                 'theme_color'   => DOCSIFYDOCS_DEFAULT_THEME_COLOR,
                 'repo_url'      => '',
@@ -28,9 +32,17 @@ class Activator {
         }
     }
 
+    /**
+     * The endpoint that serves the files is a rewrite rule, and rules only reach
+     * the database when they are flushed.
+     */
+    private static function registerRoutes(): void {
+        ( new FileServer() )->addRewriteRule();
+        FileServer::flush();
+    }
+
     private static function copySampleDocs(): void {
-        $uploads  = wp_upload_dir();
-        $dest_dir = $uploads['basedir'] . '/docsify-docs';
+        $dest_dir = Docs::dir();
 
         if ( file_exists( $dest_dir ) ) {
             return;

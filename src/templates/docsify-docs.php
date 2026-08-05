@@ -12,8 +12,7 @@ $docsifydocs_repo_url    = $docsifydocs_options['repo_url'] ?? '';
 $docsifydocs_logo_id = absint( $docsifydocs_options['logo_id'] ?? 0 );
 $docsifydocs_logo    = $docsifydocs_logo_id ? wp_get_attachment_url( $docsifydocs_logo_id ) : '';
 
-$docsifydocs_uploads  = wp_upload_dir();
-$docsifydocs_docs_url = trailingslashit( $docsifydocs_uploads['baseurl'] ) . 'docsify-docs';
+$docsifydocs_docs_url = \DocsifyDocs\Docs::basePath();
 
 $docsifydocs_vendor = DOCSIFYDOCS_URL . 'src/assets/vendor/';
 

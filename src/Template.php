@@ -39,27 +39,14 @@ class Template {
 
         add_action( 'wp_enqueue_scripts', [ $this, 'isolateStyles' ], PHP_INT_MAX );
 
-        $options       = get_option( 'docsify_docs_options', [] );
-        $is_restricted = isset( $options['is_restricted'] ) ? $options['is_restricted'] : DOCSIFYDOCS_DEFAULT_IS_RESTRICTED;
-        $allowed_roles = $options['allowed_roles'] ?? DOCSIFYDOCS_DEFAULT_ALLOWED_ROLES;
+        $access = Access::check();
 
-        if ( ! $is_restricted ) {
-            return DOCSIFYDOCS_DIR . 'src/templates/docsify-docs.php';
-        }
-
-        if ( ! is_user_logged_in() ) {
+        if ( $access === Access::LOGIN ) {
             wp_safe_redirect( wp_login_url( get_permalink() ) );
             exit;
         }
 
-        if ( empty( $allowed_roles ) || ! is_array( $allowed_roles ) ) {
-            wp_safe_redirect( home_url() );
-            exit;
-        }
-
-        $user = wp_get_current_user();
-
-        if ( empty( array_intersect( $user->roles, $allowed_roles ) ) ) {
+        if ( $access === Access::DENIED ) {
             return DOCSIFYDOCS_DIR . 'src/templates/access-denied.php';
         }
 
