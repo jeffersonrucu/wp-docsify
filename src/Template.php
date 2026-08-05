@@ -18,6 +18,27 @@ class Template {
     private function filters(): void {
         add_filter( 'page_template', [ $this, 'renderTemplate' ] );
         add_filter( 'theme_page_templates', [ $this, 'includeTemplate' ], 10, 4 );
+
+        // Registered here, not in renderTemplate: WordPress decides about the
+        // admin bar on template_redirect, before the page template is resolved.
+        add_filter( 'show_admin_bar', [ $this, 'hideAdminBar' ] );
+    }
+
+    /**
+     * The documentation page drops the theme styles, and the admin bar is one of
+     * their casualties: its markup still prints from wp_footer, unstyled, as a
+     * long bare list over the documentation. It also has nowhere to sit, since
+     * docsify pins its own layout to the top of the viewport.
+     *
+     * @param mixed $show
+     * @return mixed
+     */
+    public function hideAdminBar( $show ) {
+        return $this->isDocsPage() ? false : $show;
+    }
+
+    private function isDocsPage(): bool {
+        return get_page_template_slug() === 'template-docsify-docs.php';
     }
 
     /**
@@ -33,7 +54,7 @@ class Template {
     }
 
     public function renderTemplate( string $page_template ): string {
-        if ( get_page_template_slug() !== 'template-docsify-docs.php' ) {
+        if ( ! $this->isDocsPage() ) {
             return $page_template;
         }
 
