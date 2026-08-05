@@ -39,6 +39,8 @@ class Template {
 
         add_action( 'wp_enqueue_scripts', [ $this, 'isolateStyles' ], PHP_INT_MAX );
 
+        $this->optOutOfOptimization();
+
         $access = Access::check();
 
         if ( $access === Access::LOGIN ) {
@@ -51,6 +53,30 @@ class Template {
         }
 
         return DOCSIFYDOCS_DIR . 'src/templates/docsify-docs.php';
+    }
+
+    /**
+     * Keeps caching and optimization plugins away from the documentation page.
+     *
+     * Docsify has to run at load: it reads window.$docsify, then fetches and
+     * renders the Markdown. Deferring or reordering those scripts, which is what
+     * "delay JavaScript execution" does by rewriting every script tag to a type
+     * the browser will not run, leaves the page blank. Concatenating them breaks
+     * the plugin order docsify depends on, and caching the result would serve a
+     * restricted page to whoever asks for it next.
+     *
+     * These constants are the convention WP Rocket, W3 Total Cache, LiteSpeed
+     * Cache and others check before touching a response.
+     */
+    private function optOutOfOptimization(): void {
+        foreach ( [ 'DONOTCACHEPAGE', 'DONOTROCKETOPTIMIZE', 'DONOTMINIFY', 'DONOTCACHEOBJECT', 'DONOTASYNCCSS' ] as $constant ) {
+            if ( ! defined( $constant ) ) {
+                define( $constant, true );
+            }
+        }
+
+        // LiteSpeed reads its own filter rather than a constant.
+        add_filter( 'litespeed_control_set_nocache', '__return_true' );
     }
 
     /**
