@@ -23,6 +23,11 @@ class Admin {
         add_action( 'admin_menu', [ $this, 'addMenu' ] );
         add_action( 'admin_init', [ $this, 'registerSettings' ] );
         add_action( 'admin_enqueue_scripts', [ $this, 'enqueueAssets' ] );
+
+        // The deny rule next to the files has to follow the setting that asks for it.
+        add_action( 'update_option_docsify_docs_options', function (): void {
+            ( new Hardening() )->sync();
+        } );
     }
 
     public function enqueueAssets( string $hook ): void {
@@ -79,6 +84,7 @@ class Admin {
 
         add_settings_field( 'is_restricted', __( 'Enable Restriction', 'docsify-docs' ), [ $this, 'renderIsRestricted' ], 'docsify-docs', 'docsify_docs_access' );
         add_settings_field( 'allowed_roles', __( 'Allowed Roles', 'docsify-docs' ), [ $this, 'renderAllowedRoles' ], 'docsify-docs', 'docsify_docs_access' );
+        add_settings_field( 'protect_files', __( 'Protect Files', 'docsify-docs' ), [ $this, 'renderProtectFiles' ], 'docsify-docs', 'docsify_docs_access' );
 
         add_settings_section( 'docsify_docs_appearance', __( 'Appearance', 'docsify-docs' ), null, 'docsify-docs' );
 
@@ -101,6 +107,8 @@ class Admin {
         } else {
             $output['allowed_roles'] = [];
         }
+
+        $output['protect_files'] = ! empty( $input['protect_files'] );
 
         $output['logo_id'] = absint( $input['logo_id'] ?? 0 );
 
@@ -139,6 +147,34 @@ class Admin {
             <?php
         }
         echo '<p class="description">' . esc_html__( 'Select which roles can view the documentation.', 'docsify-docs' ) . '</p>';
+    }
+
+    public function renderProtectFiles(): void {
+        $options = get_option( 'docsify_docs_options', [] );
+        $checked = isset( $options['protect_files'] ) ? $options['protect_files'] : DOCSIFYDOCS_DEFAULT_PROTECT_FILES;
+        ?>
+        <label>
+            <input type="checkbox" name="docsify_docs_options[protect_files]" value="1" <?php checked( $checked ); ?>>
+            <?php esc_html_e( 'Serve the .md files through WordPress so the rule above also applies to them', 'docsify-docs' ); ?>
+        </label>
+        <p class="description">
+            <?php esc_html_e( 'Docsify fetches every file over the network. Without this, the .md files stay readable by direct URL even while the page is restricted.', 'docsify-docs' ); ?>
+        </p>
+        <?php
+        if ( $checked && ! Docs::hasPrettyPermalinks() ) {
+            ?>
+            <p class="description" style="color:#b32d2e;">
+                <?php
+                printf(
+                    /* translators: %s: link to the permalink settings screen */
+                    esc_html__( 'Inactive: the endpoint needs pretty permalinks. Pick any option other than Plain in %s.', 'docsify-docs' ),
+                    '<a href="' . esc_url( admin_url( 'options-permalink.php' ) ) . '">'
+                        . esc_html__( 'Settings > Permalinks', 'docsify-docs' ) . '</a>'
+                );
+                ?>
+            </p>
+            <?php
+        }
     }
 
     public function renderLogo(): void {
@@ -199,8 +235,7 @@ class Admin {
             return;
         }
 
-        $uploads  = wp_upload_dir();
-        $docs_dir = $uploads['basedir'] . '/docsify-docs';
+        $docs_dir = Docs::dir();
         ?>
         <div class="wrap">
             <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
@@ -231,6 +266,14 @@ class Admin {
                     /* translators: %s: file path */
                     esc_html__( 'Documentation files are stored in: %s', 'docsify-docs' ),
                     '<code>' . esc_html( $docs_dir ) . '/</code>'
+                );
+                ?>
+                <br>
+                <?php
+                printf(
+                    /* translators: %s: PHP constant name */
+                    esc_html__( 'Define %s in wp-config.php to keep them somewhere else, such as a folder versioned with your project.', 'docsify-docs' ),
+                    '<code>DOCSIFYDOCS_DOCS_DIR</code>'
                 );
                 ?>
             </p>
