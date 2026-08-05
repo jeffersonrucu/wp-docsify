@@ -7,9 +7,11 @@ a:hover {
     padding: 0 14px !important;
 }
 
+/* width:auto keeps square logos from being stretched by the sidebar width. */
 .app-name img {
-    width: 100% !important;
-    max-height: 38px;
+    width: auto !important;
+    max-width: 100%;
+    max-height: 40px;
     padding: 0 30px 0 0 !important;
 }
 
@@ -18,17 +20,17 @@ a:hover {
     cursor: pointer !important;
 }
 
-/* BEM - wp-docsify */
+/* BEM - docsify-docs */
 
 /* Reset global */
-.wp-docsify__reset {
+.docsify-docs__reset {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 /* Body */
-.wp-docsify__body {
+.docsify-docs__body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
@@ -40,7 +42,7 @@ a:hover {
 }
 
 /* Container - Access Denied */
-.wp-docsify__access-denied-container {
+.docsify-docs__access-denied-container {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     border-radius: 20px;
@@ -53,7 +55,7 @@ a:hover {
 }
 
 /* Lock Icon */
-.wp-docsify__lock-icon {
+.docsify-docs__lock-icon {
     width: 80px;
     height: 80px;
     margin: 0 auto 30px;
@@ -62,17 +64,17 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: wp-docsify__pulse 2s infinite;
+    animation: docsify-docs__pulse 2s infinite;
 }
 
-.wp-docsify__lock-icon svg {
+.docsify-docs__lock-icon svg {
     width: 40px;
     height: 40px;
     fill: white;
 }
 
 /* Animation Pulse */
-@keyframes wp-docsify__pulse {
+@keyframes docsify-docs__pulse {
     0% {
         transform: scale(1);
         box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.4);
@@ -88,7 +90,7 @@ a:hover {
 }
 
 /* Access Denied Title */
-.wp-docsify__access-denied-title {
+.docsify-docs__access-denied-title {
     font-size: 32px;
     font-weight: 600;
     color: #2c3e50;
@@ -97,7 +99,7 @@ a:hover {
 }
 
 /* Access Denied Message */
-.wp-docsify__access-denied-message {
+.docsify-docs__access-denied-message {
     font-size: 18px;
     color: #7f8c8d;
     margin-bottom: 40px;
@@ -105,7 +107,7 @@ a:hover {
 }
 
 /* Access Denied Details */
-.wp-docsify__access-denied-details {
+.docsify-docs__access-denied-details {
     background: #f8f9fa;
     border-radius: 12px;
     padding: 20px;
@@ -113,18 +115,18 @@ a:hover {
     border-left: 4px solid #3498db;
 }
 
-.wp-docsify__access-denied-details p {
+.docsify-docs__access-denied-details p {
     font-size: 14px;
     color: #5a6c7d;
     margin-bottom: 8px;
 }
 
-.wp-docsify__access-denied-details p:last-child {
+.docsify-docs__access-denied-details p:last-child {
     margin-bottom: 0;
 }
 
 /* Back Button */
-.wp-docsify__back-button {
+.docsify-docs__back-button {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -140,14 +142,14 @@ a:hover {
     cursor: pointer;
 }
 
-.wp-docsify__back-button:hover {
+.docsify-docs__back-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
     text-decoration: none;
     color: white;
 }
 
-.wp-docsify__back-button svg {
+.docsify-docs__back-button svg {
     width: 18px;
     height: 18px;
     fill: currentColor;
@@ -155,25 +157,25 @@ a:hover {
 
 /* Mobile Media Query */
 @media (max-width: 480px) {
-    .wp-docsify__access-denied-container {
+    .docsify-docs__access-denied-container {
         padding: 40px 30px;
     }
 
-    .wp-docsify__access-denied-title {
+    .docsify-docs__access-denied-title {
         font-size: 28px;
     }
 
-    .wp-docsify__access-denied-message {
+    .docsify-docs__access-denied-message {
         font-size: 16px;
     }
 
-    .wp-docsify__lock-icon {
+    .docsify-docs__lock-icon {
         width: 60px;
         height: 60px;
         margin-bottom: 20px;
     }
 
-    .wp-docsify__lock-icon svg {
+    .docsify-docs__lock-icon svg {
         width: 30px;
         height: 30px;
     }

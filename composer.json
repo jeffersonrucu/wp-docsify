@@ -1,9 +1,9 @@
 {
-    "name": "jeffersonrucu/wp-docsify",
+    "name": "jeffersonrucu/docsify-docs",
     "description": "Docsify for WordPress in a simple and practical way using the entire WordPress structure.",
     "autoload": {
         "psr-4": {
-            "WPDocsify\\": "src/"
+            "DocsifyDocs\\": "src/"
         }
     },
     "authors": [
