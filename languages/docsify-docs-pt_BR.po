@@ -1,0 +1,218 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Docsify Docs 3.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/docsify-docs\n"
+"Language-Team: Brazilian Portuguese\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Domain: docsify-docs\n"
+
+#. Description of the plugin
+#: docsify-docs.php
+msgid "Integrate Docsify documentation into WordPress using a custom page template with role-based access control and admin settings."
+msgstr "Integre a documentação Docsify ao WordPress usando um template de página com controle de acesso por função e painel de configurações."
+
+#: src/Admin.php
+msgid "Select the documentation logo"
+msgstr "Selecione a logo da documentação"
+
+#: src/Admin.php
+msgid "Use this logo"
+msgstr "Usar esta logo"
+
+#: src/Admin.php
+msgid "Settings"
+msgstr "Configurações"
+
+#: src/Admin.php
+msgid "Access Control"
+msgstr "Controle de Acesso"
+
+#: src/Admin.php
+msgid "Enable Restriction"
+msgstr "Ativar Restrição"
+
+#: src/Admin.php
+msgid "Allowed Roles"
+msgstr "Funções Permitidas"
+
+#: src/Admin.php
+msgid "Appearance"
+msgstr "Aparência"
+
+#: src/Admin.php
+msgid "Logo"
+msgstr "Logo"
+
+#: src/Admin.php
+msgid "Theme Color"
+msgstr "Cor do Tema"
+
+#: src/Admin.php
+msgid "Repository URL"
+msgstr "URL do Repositório"
+
+#: src/Admin.php
+msgid "Restrict access to logged-in users with specific roles"
+msgstr "Restringir o acesso a usuários logados com funções específicas"
+
+#: src/Admin.php
+msgid "Select which roles can view the documentation."
+msgstr "Selecione quais funções podem ver a documentação."
+
+#: src/Admin.php
+msgid "Select logo"
+msgstr "Selecionar logo"
+
+#: src/Admin.php
+msgid "Remove"
+msgstr "Remover"
+
+#: src/Admin.php
+msgid "Shown at the top of the documentation sidebar. Falls back to the sample logo when empty."
+msgstr "Exibida no topo da barra lateral da documentação. Usa a logo de exemplo quando estiver vazio."
+
+#: src/Admin.php
+msgid "Accent color used by Docsify."
+msgstr "Cor de destaque usada pelo Docsify."
+
+#: src/Admin.php
+msgid "Optional. Adds a GitHub link in the Docsify toolbar."
+msgstr "Opcional. Adiciona um link do GitHub na barra do Docsify."
+
+#: src/Admin.php
+msgid "How to Use"
+msgstr "Como Usar"
+
+#: src/Admin.php
+msgid "Generate the documentation page with the button above."
+msgstr "Gere a página de documentação com o botão acima."
+
+#: src/Admin.php
+msgid "Write your documentation by editing the .md files in the folder below."
+msgstr "Escreva sua documentação editando os arquivos .md na pasta abaixo."
+
+#: src/Admin.php
+msgid "Visit the page to see the result."
+msgstr "Acesse a página para ver o resultado."
+
+#. translators: %s: file path
+#: src/Admin.php
+msgid "Documentation files are stored in: %s"
+msgstr "Os arquivos de documentação ficam em: %s"
+
+#: src/Admin/DocsPage.php
+msgid "Unauthorized."
+msgstr "Não autorizado."
+
+#: src/Admin/DocsPage.php src/templates/docsify-docs.php
+msgid "Documentation"
+msgstr "Documentação"
+
+#: src/Admin/DocsPage.php
+msgid "Documentation Page"
+msgstr "Página da Documentação"
+
+#. translators: %s: link to the documentation page
+#: src/Admin/DocsPage.php
+msgid "The documentation page already exists: %s"
+msgstr "A página de documentação já existe: %s"
+
+#: src/Admin/DocsPage.php
+msgid "Edit page"
+msgstr "Editar página"
+
+#: src/Admin/DocsPage.php
+msgid "This moves the current page to the trash and creates a new one. Continue?"
+msgstr "Isto move a página atual para a lixeira e cria uma nova. Continuar?"
+
+#: src/Admin/DocsPage.php
+msgid "Reset page"
+msgstr "Recriar página"
+
+#: src/Admin/DocsPage.php
+msgid "Create the page that renders your documentation, already using the correct template."
+msgstr "Crie a página que exibe sua documentação, já com o template correto."
+
+#: src/Admin/DocsPage.php
+msgid "Generate documentation page"
+msgstr "Gerar página de documentação"
+
+#: src/Admin/DocsPage.php
+msgid "Documentation page ready."
+msgstr "Página de documentação pronta."
+
+#: src/Admin/DocsPage.php
+msgid "Could not create the documentation page."
+msgstr "Não foi possível criar a página de documentação."
+
+#: src/templates/access-denied.php
+msgid "Access Denied"
+msgstr "Acesso Negado"
+
+#: src/templates/access-denied.php
+msgid "Sorry, you do not have permission to access this documentation."
+msgstr "Desculpe, você não possui permissão para acessar esta documentação."
+
+#: src/templates/access-denied.php
+msgid "Your account may not have the necessary permissions."
+msgstr "Sua conta pode não ter as permissões necessárias."
+
+#: src/templates/access-denied.php
+msgid "Back to Home"
+msgstr "Voltar ao Início"
+
+#: src/templates/docsify-docs.php
+msgid "Copy"
+msgstr "Copiar"
+
+#: src/templates/docsify-docs.php
+msgid "Error"
+msgstr "Erro"
+
+#: src/templates/docsify-docs.php
+msgid "Copied"
+msgstr "Copiado"
+
+#: src/templates/docsify-docs.php
+msgid "Previous"
+msgstr "Voltar"
+
+#: src/templates/docsify-docs.php
+msgid "Next"
+msgstr "Próximo"
+
+#: src/templates/docsify-docs.php
+msgid "Search..."
+msgstr "Pesquisar..."
+
+#: src/templates/docsify-docs.php
+msgid "No results found"
+msgstr "Nada encontrado"
+
+#: src/Admin/DocsPage.php
+msgid "View page"
+msgstr "Ver página"
+
+#: src/Admin/DocsPage.php
+msgid "Page URL"
+msgstr "URL da página"
+
+#: src/Admin/DocsPage.php
+msgid "Save URL"
+msgstr "Salvar URL"
+
+#: src/Admin/DocsPage.php
+msgid "Page URL updated."
+msgstr "URL da página atualizada."
+
+#: src/Admin/DocsPage.php
+msgid "Could not update the page URL."
+msgstr "Não foi possível atualizar a URL da página."
+
+#: src/Admin.php
+msgid "Ideal size: horizontal image of 240×40 px (use 480×80 px for retina displays). It is scaled down to fit 40 px tall, keeping its proportions."
+msgstr "Tamanho ideal: imagem horizontal de 240×40 px (use 480×80 px para telas retina). Ela é reduzida para caber em 40 px de altura, mantendo a proporção."

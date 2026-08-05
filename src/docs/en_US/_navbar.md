@@ -1,1 +1,0 @@
-* [Best Practices](/good-practices)

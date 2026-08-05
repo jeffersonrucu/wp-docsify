@@ -1,97 +1,117 @@
-=== WP Docsify ===
+=== Docsify Docs ===
 Contributors:      jeffersonrucu, studiostg
 Tags:              documentation, docsify, markdown, docs, knowledge-base
 Requires at least: 5.9
-Tested up to:      6.7
+Tested up to:      7.0
 Requires PHP:      7.4
-Stable tag:        2.0.0
+Stable tag:        3.0.0
 License:           GPL-2.0+
 License URI:       https://www.gnu.org/licenses/gpl-2.0.txt
 
-Integrate Docsify documentation into WordPress using a custom page template with role-based access control and multilingual support.
+Integrate Docsify documentation into WordPress using a custom page template with role-based access control.
 
 == Description ==
 
-WP Docsify embeds the [Docsify](https://docsify.js.org) documentation generator into your WordPress site as a custom page template. It renders Markdown (.md) files stored in your uploads directory — no database required.
+Docsify Docs embeds the [Docsify](https://docsify.js.org) documentation generator into your WordPress site as a custom page template. It renders Markdown (.md) files stored in your uploads directory — no database required.
 
 **Features**
 
-* Custom page template — select "WP Docsify" on any WordPress page
+* Custom page template — select "Docsify Docs" on any WordPress page
 * Role-based access control configured from the admin panel
-* Multilingual support (en_US, pt_BR)
-* Admin settings panel under Settings > WP Docsify
-* Docsify plugins included: full-text search, pagination, copy code, collapsible sidebar, Mermaid diagrams (via ESM)
-* Documentation files stored in `wp-content/uploads/wp-docsify/` — survives plugin updates
+* Admin settings panel under the Docsify Docs menu
+* Custom logo picked from the Media Library
+* Docsify plugins included: full-text search, pagination, copy code, collapsible sidebar, Mermaid diagrams
+* All scripts and styles bundled with the plugin — no external CDN requests
+* Documentation page isolated from theme and block styles
+* Documentation files stored in `wp-content/uploads/docsify-docs/` — survives plugin updates
 * Sample documentation copied to uploads on activation
 * No Composer required — built-in PSR-4 autoloader
 
-== Third-Party Services ==
-
-This plugin loads scripts and stylesheets from the following external CDN services.
-These resources are loaded **only on pages that use the "WP Docsify" template**.
-
-* **jsDelivr** (https://cdn.jsdelivr.net) — Docsify core library, Vue CSS theme, search plugin, sidebar collapse plugin, D3, Mermaid ESM
-  Privacy policy: https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net
-* **unpkg** (https://unpkg.com) — docsify-pagination, docsify-copy-code, docsify-mermaid, docsify-mermaid-zoom
-  Privacy policy: https://www.npmjs.com/policies/privacy
-
-Review the privacy policies of these CDN services before using this plugin on sites subject to GDPR or similar regulations.
-
 == Installation ==
 
-1. Upload the `wp-docsify` folder to the `/wp-content/plugins/` directory.
+**Installing the .zip from the WordPress admin**
+
+1. Download `docsify-docs-3.0.0.zip`.
+2. In WordPress, go to **Plugins > Add New Plugin** and click **Upload Plugin** at the top of the screen.
+3. Choose the .zip file and click **Install Now**. Do not unzip it first.
+4. Click **Activate Plugin**.
+
+Upgrading from `wp-docsify`? Deactivate and delete it before activating this one. Deleting it does not touch your documentation, which lives in `wp-content/uploads/`.
+
+**Installing manually (FTP/SSH)**
+
+1. Unzip the file and upload the `docsify-docs` folder to `wp-content/plugins/`.
 2. Activate the plugin through the **Plugins** menu in WordPress.
-3. Go to **Settings > WP Docsify** to configure access control, theme color, and repository URL.
-4. Create a WordPress page and set its template to **WP Docsify** in the Page Attributes panel.
-5. Publish the page — sample documentation is already in `wp-content/uploads/wp-docsify/`.
+
+**After activating**
+
+1. Go to **Docsify Docs** in the admin menu.
+2. Click **Generate documentation page**. This creates a published page using the correct template — no manual setup needed.
+3. Click **View page** to open it. Sample documentation is already rendering.
+4. Optional: change the page address in the **Page URL** field, then click **Save URL**.
+5. Under **Appearance**, upload your logo and pick the theme color.
+6. Under **Access Control**, enable **Enable Restriction** and check the roles allowed to read the documentation.
+7. Replace the Markdown files in `wp-content/uploads/docsify-docs/` with your own. `README.md` is the home page, `_sidebar.md` is the menu, and `_navbar.md` is the top bar.
+
+Prefer to attach the documentation to a page you already have? Edit that page and pick the **Docsify Docs** template under **Page Attributes** instead of using the generate button.
 
 == Frequently Asked Questions ==
 
 = Where do I put my documentation files? =
 
-After activation, sample docs are copied to `wp-content/uploads/wp-docsify/en_US/` and `wp-content/uploads/wp-docsify/pt_BR/`. Replace or extend those Markdown files. `README.md` is always the home page.
+After activation, sample docs are copied to `wp-content/uploads/docsify-docs/`. Replace or extend those Markdown files. `README.md` is always the home page.
 
 = How do I restrict access? =
 
-Go to **Settings > WP Docsify**, enable **Enable Restriction**, and check the roles that should have access. Logged-out users are redirected to the WordPress login page automatically.
+Go to **Docsify Docs** in the admin menu, enable **Enable Restriction**, and check the roles that should have access. Logged-out users are redirected to the WordPress login page automatically.
 
 = Does this plugin require Composer? =
 
-No. Version 2.0.0 replaced the Composer autoloader with a built-in PSR-4 loader. No `composer install` is needed.
+No. The Composer autoloader was replaced with a built-in PSR-4 loader. No `composer install` is needed.
 
 = Can I use a custom theme? =
 
-Yes. Replace the Docsify Vue theme URL in `src/templates/wp-docsify.php` with any other Docsify theme CDN URL, or enqueue your own stylesheet.
+Yes. Swap the bundled Vue theme enqueued in `src/templates/docsify-docs.php` for another Docsify theme, or enqueue your own stylesheet.
 
 = Will my documentation survive a plugin update? =
 
-Yes. Documentation files are stored in `wp-content/uploads/wp-docsify/`, which is never touched by plugin updates.
+Yes. Documentation files are stored in `wp-content/uploads/docsify-docs/`, which is never touched by plugin updates.
 
 == Screenshots ==
 
-1. WP Docsify documentation page rendered inside WordPress.
+1. Docsify Docs documentation page rendered inside WordPress.
 2. Access denied page shown to unauthorized users.
-3. Admin settings panel under Settings > WP Docsify.
+3. Admin settings panel under the Docsify Docs menu.
 
 == Changelog ==
 
-= 2.0.0 =
-* Added admin settings page (access control, theme color, repository URL).
-* Documentation files now stored in `wp-content/uploads/wp-docsify/` (survives plugin updates).
+= 3.0.0 =
+* **Breaking:** the plugin folder and text domain are now `docsify-docs` (was `wp-docsify`). Settings, documentation files, and page templates are migrated automatically on the first admin page load.
+* **Breaking:** the sample documentation is pt_BR only and lives directly in `wp-content/uploads/docsify-docs/`. The per-locale subfolder is gone; an existing `pt_BR/` folder is moved up automatically and an `en_US/` folder is left untouched.
+* Added admin settings page (access control, logo, theme color, repository URL).
+* Added logo selection from the Media Library, replacing the hardcoded `_media/logo.svg`.
+* Sample documentation is now pt_BR only and lives directly in `wp-content/uploads/docsify-docs/` (no locale subfolder). Existing locale folders are migrated automatically.
+* Bundled every Docsify asset with the plugin — no more jsDelivr/unpkg requests.
+* Added View page button and inline editing of the documentation page URL.
+* Theme and block styles are no longer loaded on the documentation page, so they cannot break the Docsify layout. Opt out with the `docsify_docs_isolate_styles` filter.
+* Documentation files now stored in `wp-content/uploads/docsify-docs/` (survives plugin updates).
 * Replaced Composer autoloader with built-in PSR-4 autoloader.
 * Scripts and styles now registered via `wp_enqueue_script` / `wp_enqueue_style`.
 * Added `wp_head()` and `wp_footer()` to all templates.
-* Fixed text domain to match plugin slug (`wp-docsify`).
+* Fixed text domain to match plugin slug (`docsify-docs`).
 * Added `Requires at least`, `Requires PHP`, and `Domain Path` headers.
 * Sample documentation copied to uploads directory on activation.
 * Options cleaned up on plugin uninstall.
 * Removed Google Fonts CDN from access-denied template (uses system fonts).
 * Added direct-access guards to all PHP class files.
 
+= 2.0.0 =
+* Multi-language support and role-based access control.
+
 = 1.0.0 =
 * Initial release.
 
 == Upgrade Notice ==
 
-= 2.0.0 =
-Documentation files have moved from the plugin directory to `wp-content/uploads/wp-docsify/`. Sample files are copied there automatically on activation. If you had custom docs in the plugin folder, move them to the new uploads path.
+= 3.0.0 =
+Delete the old `wp-docsify` plugin before activating this one; docs in `wp-content/uploads/` are untouched. Settings and files migrate automatically. Docs are pt_BR only now: a `pt_BR/` folder moves up one level, an `en_US/` folder is kept but no longer rendered.

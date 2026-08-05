@@ -1,6 +1,6 @@
 <?php
 
-namespace WPDocsify;
+namespace DocsifyDocs;
 
 if ( ! defined( 'WPINC' ) ) {
     die;
