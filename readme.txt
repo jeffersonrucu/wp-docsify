@@ -4,7 +4,7 @@ Tags:              documentation, docsify, markdown, docs, knowledge-base
 Requires at least: 5.9
 Tested up to:      7.0
 Requires PHP:      7.4
-Stable tag:        3.0.0
+Stable tag:        3.1.0
 License:           GPL-2.0+
 License URI:       https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -18,6 +18,7 @@ Docsify Docs embeds the [Docsify](https://docsify.js.org) documentation generato
 
 * Custom page template — select "Docsify Docs" on any WordPress page
 * Role-based access control configured from the admin panel
+* Markdown files served through WordPress, so the access rule covers the files and not just the page
 * Admin settings panel under the Docsify Docs menu
 * Custom logo picked from the Media Library
 * Docsify plugins included: full-text search, pagination, copy code, collapsible sidebar, Mermaid diagrams
@@ -77,6 +78,20 @@ Yes. Swap the bundled Vue theme enqueued in `src/templates/docsify-docs.php` for
 
 Yes. Documentation files are stored in `wp-content/uploads/docsify-docs/`, which is never touched by plugin updates.
 
+= Can restricted documentation still be read by URL? =
+
+Not with **Protect Files** enabled, which is the default. Docsify fetches every `.md` over the network, so a documentation folder reachable by URL is readable by anyone who guesses the path. With the setting on, files are served by WordPress through `/docsify-docs-files/…` under the same role rule as the page, and a deny rule is written next to them so the folder itself answers nothing.
+
+The endpoint is a rewrite rule, so it needs pretty permalinks. On plain permalinks the setting reports itself as inactive and files fall back to direct URLs. On nginx, or any server that ignores `.htaccess`, add the equivalent deny for the documentation folder to your server configuration.
+
+= Can I keep the documentation somewhere else? =
+
+Yes. Define `DOCSIFYDOCS_DOCS_DIR` in `wp-config.php` with an absolute path, which is how you keep the Markdown files in a folder versioned with your project:
+
+`define( 'DOCSIFYDOCS_DOCS_DIR', __DIR__ . '/wp-content/plugins/docsify-docs/src/docs' );`
+
+With **Protect Files** enabled the folder does not have to be reachable by URL at all, so it can live outside the web root. The `docsify_docs_dir` filter does the same thing from PHP, and `docsify_docs_base_path` overrides the URL Docsify reads from.
+
 == Screenshots ==
 
 1. Docsify Docs documentation page rendered inside WordPress.
@@ -84,6 +99,14 @@ Yes. Documentation files are stored in `wp-content/uploads/docsify-docs/`, which
 3. Admin settings panel under the Docsify Docs menu.
 
 == Changelog ==
+
+= 3.1.0 =
+* Added **Protect Files**: Markdown files are served by WordPress under the same role rule as the page, so restricted documentation is no longer readable by direct URL. Enabled by default.
+* Added a deny rule written next to the documentation files while protection is on, so the folder itself is not served by Apache.
+* Added `DOCSIFYDOCS_DOCS_DIR` to point the documentation at any absolute path, which allows keeping the Markdown files under version control with the project. Also available as the `docsify_docs_dir` filter, with `docsify_docs_base_path` for the URL.
+* The `DOCSIFYDOCS_DEFAULT_*` constants can now be set from `wp-config.php`, so a project can keep its own defaults under version control instead of only in the database.
+* The access rule now lives in one place and is shared by the page template and the file endpoint.
+* An empty allowed-roles list now shows the access-denied page instead of redirecting to the home page.
 
 = 3.0.0 =
 * **Breaking:** the plugin folder and text domain are now `docsify-docs` (was `wp-docsify`). Settings, documentation files, and page templates are migrated automatically on the first admin page load.
@@ -112,6 +135,9 @@ Yes. Documentation files are stored in `wp-content/uploads/docsify-docs/`, which
 * Initial release.
 
 == Upgrade Notice ==
+
+= 3.1.0 =
+Protected file delivery is on after the update. Documentation keeps rendering, but the `.md` files stop answering on their old URLs. If your permalinks are set to Plain, the endpoint stays inactive and nothing changes.
 
 = 3.0.0 =
 Delete the old `wp-docsify` plugin before activating this one; docs in `wp-content/uploads/` are untouched. Settings and files migrate automatically. Docs are pt_BR only now: a `pt_BR/` folder moves up one level, an `en_US/` folder is kept but no longer rendered.
