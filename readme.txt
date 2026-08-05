@@ -4,7 +4,7 @@ Tags:              documentation, docsify, markdown, docs, knowledge-base
 Requires at least: 5.9
 Tested up to:      7.0
 Requires PHP:      7.4
-Stable tag:        3.1.0
+Stable tag:        3.1.1
 License:           GPL-2.0+
 License URI:       https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -100,6 +100,11 @@ With **Protect Files** enabled the folder does not have to be reachable by URL a
 
 == Changelog ==
 
+= 3.1.1 =
+* Fixed a blank documentation page on sites running a page cache or a JavaScript optimizer. WP Rocket's "delay JavaScript execution" rewrites every script tag to a type the browser will not run, which docsify cannot survive, and a cached copy of the page is served before WordPress loads. The page now declares the constants WP Rocket, W3 Total Cache and LiteSpeed Cache check before touching a response.
+* Fixed a collapsed sidebar section disappearing from the menu. Docsify hides every non-anchor child of a collapsed item, which took plain-text group headings down with the list and left no way to reopen them.
+* Fixed the admin bar printing unstyled over the documentation. The page drops the theme styles, so the bar had no stylesheet, and no room either, since docsify pins its layout to the top of the viewport. It is now hidden on the documentation page only.
+
 = 3.1.0 =
 * Added **Protect Files**: Markdown files are served by WordPress under the same role rule as the page, so restricted documentation is no longer readable by direct URL. Enabled by default.
 * Added a deny rule written next to the documentation files while protection is on, so the folder itself is not served by Apache.
@@ -135,6 +140,9 @@ With **Protect Files** enabled the folder does not have to be reachable by URL a
 * Initial release.
 
 == Upgrade Notice ==
+
+= 3.1.1 =
+Recommended for anyone on 3.1.0, and required if your site runs a page cache or a JavaScript optimizer: the documentation page could render blank. After updating, purge your cache once so the stored copy of the page is dropped.
 
 = 3.1.0 =
 Protected file delivery is on after the update. Documentation keeps rendering, but the `.md` files stop answering on their old URLs. If your permalinks are set to Plain, the endpoint stays inactive and nothing changes.
