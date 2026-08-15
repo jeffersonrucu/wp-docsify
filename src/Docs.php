@@ -16,16 +16,16 @@ class Docs {
     /**
      * Absolute path to the directory holding the Markdown files.
      *
-     * Defaults to the uploads directory so the docs survive plugin updates.
-     * Define DOCSIFYDOCS_DOCS_DIR in wp-config.php to keep them elsewhere, for
-     * instance inside a folder that is versioned with the project.
+     * Defaults to the docs bundled with the plugin (src/docs), so the docs a
+     * project versions alongside the code are served as-is. Define
+     * DOCSIFYDOCS_DOCS_DIR in wp-config.php to keep them elsewhere, for instance
+     * the uploads directory when they should survive plugin updates.
      */
     public static function dir(): string {
         if ( defined( 'DOCSIFYDOCS_DOCS_DIR' ) && DOCSIFYDOCS_DOCS_DIR ) {
             $dir = DOCSIFYDOCS_DOCS_DIR;
         } else {
-            $uploads = wp_upload_dir();
-            $dir     = trailingslashit( $uploads['basedir'] ) . self::DIR_NAME;
+            $dir = DOCSIFYDOCS_DIR . 'src/docs';
         }
 
         return untrailingslashit( (string) apply_filters( 'docsify_docs_dir', $dir ) );
