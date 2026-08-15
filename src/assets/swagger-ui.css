@@ -1,0 +1,611 @@
+/**
+ * Swagger UI theme for Docsify.
+ *
+ * The plugin mounts #docsify-swagger-ui as a sibling of .markdown-section, so no
+ * Docsify rule reaches this markup and these declarations need no !important.
+ */
+
+/* An API reference needs more room than the reading measure of a doc page. */
+@media screen and ( min-width: 1200px ) {
+    body.docsify-swagger-page {
+        --content-max-width: 1100px;
+    }
+}
+
+#docsify-swagger-ui {
+    --swagger-accent: var( --docsify-swagger-accent, #2674d9 );
+    --swagger-heading: #1f2d3d;
+    --swagger-text: #34495e;
+    --swagger-muted: #6b7c93;
+    --swagger-border: #e3eaf2;
+    --swagger-surface: #fff;
+    --swagger-surface-alt: #f7fafd;
+    --swagger-radius: 10px;
+    --swagger-shadow: 0 1px 2px rgb( 27 49 71 / 5% ), 0 10px 24px rgb( 27 49 71 / 5% );
+
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: calc( 100% - var( --content-margin-inline, 45px ) * 2 );
+    padding-bottom: 2rem;
+    width: var( --content-max-width, 1100px );
+}
+
+#docsify-swagger-ui .swagger-ui,
+#docsify-swagger-ui .swagger-ui .info li,
+#docsify-swagger-ui .swagger-ui .info p,
+#docsify-swagger-ui .swagger-ui .info table,
+#docsify-swagger-ui .swagger-ui .opblock-description-wrapper p,
+#docsify-swagger-ui .swagger-ui .opblock-tag,
+#docsify-swagger-ui .swagger-ui .opblock-title_normal p,
+#docsify-swagger-ui .swagger-ui .response-col_description,
+#docsify-swagger-ui .swagger-ui .tab li,
+#docsify-swagger-ui .swagger-ui label,
+#docsify-swagger-ui .swagger-ui select,
+#docsify-swagger-ui .swagger-ui table thead tr th {
+    color: var( --swagger-text );
+    font-family: inherit;
+}
+
+#docsify-swagger-ui .swagger-ui .btn,
+#docsify-swagger-ui .swagger-ui .info .title,
+#docsify-swagger-ui .swagger-ui h4,
+#docsify-swagger-ui .swagger-ui h5 {
+    font-family: inherit;
+}
+
+/* Loading state — Swagger prints an uppercase "loading" label inside the spinner. */
+
+#docsify-swagger-ui .swagger-ui .loading-container {
+    padding: 2.5rem 0;
+}
+
+#docsify-swagger-ui .swagger-ui .loading-container .loading:after {
+    content: "";
+}
+
+#docsify-swagger-ui .swagger-ui .loading-container .loading:before {
+    border-color: var( --swagger-border );
+    border-top-color: var( --swagger-accent );
+    border-width: 3px;
+    height: 34px;
+    margin: -17px;
+    width: 34px;
+}
+
+/* Header */
+
+#docsify-swagger-ui .swagger-ui .info {
+    margin: 0 0 1.5rem;
+}
+
+#docsify-swagger-ui .swagger-ui .info .title {
+    align-items: center;
+    color: var( --swagger-heading );
+    font-size: 1.5rem;
+    font-weight: 700;
+    gap: 0.5rem;
+    line-height: 1.3;
+    margin: 0 0 0.4rem;
+}
+
+#docsify-swagger-ui .swagger-ui .info .title small {
+    background: var( --swagger-surface-alt );
+    border: 1px solid var( --swagger-border );
+    border-radius: 999px;
+    margin: 0;
+    padding: 0.1rem 0.55rem;
+    vertical-align: middle;
+}
+
+#docsify-swagger-ui .swagger-ui .info .title small pre {
+    color: var( --swagger-muted );
+    font-family: inherit;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+#docsify-swagger-ui .swagger-ui .info .title small.version-stamp {
+    background: color-mix( in srgb, var( --swagger-accent ) 10%, #fff );
+    border-color: color-mix( in srgb, var( --swagger-accent ) 30%, #fff );
+}
+
+#docsify-swagger-ui .swagger-ui .info .title small.version-stamp pre {
+    color: var( --swagger-accent );
+}
+
+#docsify-swagger-ui .swagger-ui .info .base-url,
+#docsify-swagger-ui .swagger-ui .info .link {
+    color: var( --swagger-muted );
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.8rem;
+}
+
+#docsify-swagger-ui .swagger-ui .info .description {
+    color: var( --swagger-text );
+}
+
+/* Servers and authorization */
+
+#docsify-swagger-ui .swagger-ui .scheme-container {
+    background: var( --swagger-surface );
+    border: 1px solid var( --swagger-border );
+    border-radius: var( --swagger-radius );
+    box-shadow: var( --swagger-shadow );
+    margin: 0 0 2rem;
+    padding: 1rem 1.15rem;
+}
+
+#docsify-swagger-ui .swagger-ui .scheme-container .schemes {
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+#docsify-swagger-ui .swagger-ui .scheme-container .servers > label {
+    color: var( --swagger-muted );
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin: 0 0 0.4rem;
+    text-transform: uppercase;
+}
+
+#docsify-swagger-ui .swagger-ui .scheme-container .servers select {
+    display: block;
+    margin: 0;
+}
+
+/* Tag sections */
+
+#docsify-swagger-ui .swagger-ui .opblock-tag {
+    align-items: center;
+    border: 0;
+    color: var( --swagger-heading );
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 2rem 0 0.75rem;
+    padding: 0;
+}
+
+#docsify-swagger-ui .swagger-ui .opblock-tag:hover {
+    background: transparent;
+}
+
+#docsify-swagger-ui .swagger-ui .opblock-tag small {
+    color: var( --swagger-muted );
+    font-size: 0.82rem;
+    font-weight: 400;
+    padding-left: 0.75rem;
+}
+
+/* Operations */
+
+#docsify-swagger-ui .swagger-ui .opblock {
+    background: var( --swagger-surface );
+    border: 1px solid var( --swagger-border );
+    border-left: 4px solid var( --swagger-method, var( --swagger-accent ) );
+    border-radius: var( --swagger-radius );
+    box-shadow: var( --swagger-shadow );
+    margin: 0 0 0.7rem;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+#docsify-swagger-ui .swagger-ui .opblock:hover {
+    box-shadow: 0 2px 4px rgb( 27 49 71 / 6% ), 0 12px 28px rgb( 27 49 71 / 9% );
+}
+
+#docsify-swagger-ui .swagger-ui .opblock.is-open {
+    border-color: color-mix( in srgb, var( --swagger-method, var( --swagger-accent ) ) 35%, #fff );
+    border-left-color: var( --swagger-method, var( --swagger-accent ) );
+}
+
+#docsify-swagger-ui .swagger-ui .opblock.opblock-get {
+    --swagger-method: #2878d4;
+}
+
+#docsify-swagger-ui .swagger-ui .opblock.opblock-post {
+    --swagger-method: #12866a;
+}
+
+#docsify-swagger-ui .swagger-ui .opblock.opblock-put {
+    --swagger-method: #b46a12;
+}
+
+#docsify-swagger-ui .swagger-ui .opblock.opblock-delete {
+    --swagger-method: #c0392b;
+}
+
+#docsify-swagger-ui .swagger-ui .opblock.opblock-patch {
+    --swagger-method: #0f8a90;
+}
+
+#docsify-swagger-ui .swagger-ui .opblock.opblock-head,
+#docsify-swagger-ui .swagger-ui .opblock.opblock-options {
+    --swagger-method: #6b7c93;
+}
+
+#docsify-swagger-ui .swagger-ui .opblock .opblock-summary {
+    border: 0;
+}
+
+#docsify-swagger-ui .swagger-ui .opblock.is-open .opblock-summary {
+    border-bottom: 1px solid var( --swagger-border );
+}
+
+#docsify-swagger-ui .swagger-ui .opblock .opblock-summary-control {
+    align-items: center;
+    gap: 0.85rem;
+    min-height: 52px;
+    padding: 0.5rem 0.9rem;
+}
+
+#docsify-swagger-ui .swagger-ui .opblock .opblock-summary-method {
+    background: var( --swagger-method, var( --swagger-accent ) );
+    border-radius: 6px;
+    box-shadow: none;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    min-width: 62px;
+    padding: 0.45rem 0.5rem;
+    text-shadow: none;
+}
+
+#docsify-swagger-ui .swagger-ui .opblock-summary-path,
+#docsify-swagger-ui .swagger-ui .opblock-summary-path__deprecated {
+    align-items: center;
+    color: var( --swagger-heading );
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+#docsify-swagger-ui .swagger-ui .opblock-summary-description {
+    color: var( --swagger-muted );
+    font-family: inherit;
+    font-size: 0.85rem;
+}
+
+#docsify-swagger-ui .swagger-ui .opblock .opblock-section-header {
+    background: var( --swagger-surface-alt );
+    border-bottom: 1px solid var( --swagger-border );
+    box-shadow: none;
+    min-height: 48px;
+    padding: 0.5rem 0.9rem;
+}
+
+#docsify-swagger-ui .swagger-ui .opblock .opblock-section-header h4,
+#docsify-swagger-ui .swagger-ui .opblock .opblock-title,
+#docsify-swagger-ui .swagger-ui .opblock .tab li button.tablinks {
+    color: var( --swagger-heading );
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+#docsify-swagger-ui .swagger-ui .opblock-body {
+    padding: 0 0.35rem;
+}
+
+#docsify-swagger-ui .swagger-ui .opblock-description-wrapper,
+#docsify-swagger-ui .swagger-ui .opblock-external-docs-wrapper,
+#docsify-swagger-ui .swagger-ui .opblock-title_normal {
+    padding: 0.9rem;
+}
+
+/* Tables: keep row separators only, drop Swagger's boxed grid. */
+
+#docsify-swagger-ui .swagger-ui table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#docsify-swagger-ui .swagger-ui table thead tr td,
+#docsify-swagger-ui .swagger-ui table thead tr th {
+    border-bottom: 1px solid var( --swagger-border );
+    color: var( --swagger-muted );
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 0.5rem 0.75rem;
+    text-transform: uppercase;
+}
+
+#docsify-swagger-ui .swagger-ui table tbody tr td {
+    border-bottom: 1px solid var( --swagger-border );
+    padding: 0.75rem;
+    vertical-align: top;
+}
+
+#docsify-swagger-ui .swagger-ui table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+#docsify-swagger-ui .swagger-ui .parameter__name {
+    color: var( --swagger-heading );
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+#docsify-swagger-ui .swagger-ui .parameter__type,
+#docsify-swagger-ui .swagger-ui .parameter__in,
+#docsify-swagger-ui .swagger-ui .prop-format {
+    color: var( --swagger-muted );
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.75rem;
+}
+
+#docsify-swagger-ui .swagger-ui .parameter__name.required:after {
+    color: #c0392b;
+}
+
+#docsify-swagger-ui .swagger-ui .response-col_status {
+    color: var( --swagger-heading );
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+#docsify-swagger-ui .swagger-ui .response-col_links {
+    color: var( --swagger-muted );
+    font-size: 0.8rem;
+}
+
+#docsify-swagger-ui .swagger-ui .responses-inner {
+    padding: 0.9rem;
+}
+
+/* Buttons */
+
+#docsify-swagger-ui .swagger-ui .btn {
+    border-radius: 6px;
+    box-shadow: none;
+    font-weight: 600;
+    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+#docsify-swagger-ui .swagger-ui .btn.execute {
+    background-color: var( --swagger-accent );
+    border-color: var( --swagger-accent );
+    color: #fff;
+}
+
+#docsify-swagger-ui .swagger-ui .btn.execute:hover {
+    filter: brightness( 94% );
+}
+
+#docsify-swagger-ui .swagger-ui .btn.authorize,
+#docsify-swagger-ui .swagger-ui .btn.try-out__btn {
+    border-color: var( --swagger-accent );
+    color: var( --swagger-accent );
+}
+
+#docsify-swagger-ui .swagger-ui .btn.authorize svg {
+    fill: var( --swagger-accent );
+}
+
+#docsify-swagger-ui .swagger-ui .btn.authorize:hover,
+#docsify-swagger-ui .swagger-ui .btn.try-out__btn:hover {
+    background: color-mix( in srgb, var( --swagger-accent ) 8%, #fff );
+}
+
+#docsify-swagger-ui .swagger-ui .btn.cancel {
+    border-color: #b3c0cf;
+    color: var( --swagger-muted );
+}
+
+#docsify-swagger-ui .swagger-ui .btn.cancel:hover {
+    background: var( --swagger-surface-alt );
+}
+
+#docsify-swagger-ui .swagger-ui .execute-wrapper {
+    padding: 0.9rem;
+}
+
+/* Form controls */
+
+#docsify-swagger-ui .swagger-ui input[type="email"],
+#docsify-swagger-ui .swagger-ui input[type="file"],
+#docsify-swagger-ui .swagger-ui input[type="password"],
+#docsify-swagger-ui .swagger-ui input[type="search"],
+#docsify-swagger-ui .swagger-ui input[type="text"],
+#docsify-swagger-ui .swagger-ui select,
+#docsify-swagger-ui .swagger-ui textarea {
+    background-color: var( --swagger-surface );
+    border: 1px solid #c3d0de;
+    border-radius: 6px;
+    box-shadow: none;
+    color: var( --swagger-heading );
+    font-family: inherit;
+    font-size: 0.875rem;
+    padding: 0.45rem 0.6rem;
+}
+
+#docsify-swagger-ui .swagger-ui select {
+    background-position: right 0.6rem center;
+    font-weight: 600;
+    padding-right: 2rem;
+}
+
+#docsify-swagger-ui .swagger-ui .response-control-media-type__accept-message {
+    color: var( --swagger-muted );
+    font-size: 0.72rem;
+}
+
+#docsify-swagger-ui .swagger-ui .content-type-wrapper select,
+#docsify-swagger-ui .swagger-ui .response-control-media-type--accept-controller select.content-type {
+    border-color: #c3d0de;
+}
+
+#docsify-swagger-ui .swagger-ui a:focus-visible,
+#docsify-swagger-ui .swagger-ui button:focus-visible,
+#docsify-swagger-ui .swagger-ui input:focus-visible,
+#docsify-swagger-ui .swagger-ui select:focus-visible,
+#docsify-swagger-ui .swagger-ui textarea:focus-visible {
+    outline: 3px solid color-mix( in srgb, var( --swagger-accent ) 35%, transparent );
+    outline-offset: 2px;
+}
+
+/* Tabs (Example Value / Schema) */
+
+#docsify-swagger-ui .swagger-ui .tab li,
+#docsify-swagger-ui .swagger-ui .tab li button {
+    color: var( --swagger-muted );
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+#docsify-swagger-ui .swagger-ui .tab li.active,
+#docsify-swagger-ui .swagger-ui .tab li.active button,
+#docsify-swagger-ui .swagger-ui .tab li.tabitem.active h4 span {
+    color: var( --swagger-accent );
+}
+
+#docsify-swagger-ui .swagger-ui .tab li:not(:last-child):after {
+    background: var( --swagger-border );
+}
+
+/* Code samples and schemas */
+
+#docsify-swagger-ui .swagger-ui .highlight-code,
+#docsify-swagger-ui .swagger-ui .highlight-code > .microlight,
+#docsify-swagger-ui .swagger-ui .opblock pre.microlight,
+#docsify-swagger-ui .swagger-ui .model-example .microlight {
+    background: var( --swagger-surface-alt );
+    border: 1px solid var( --swagger-border );
+    border-radius: 8px;
+    color: var( --swagger-heading );
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.82rem;
+    line-height: 1.6;
+}
+
+/* The highlighter writes its palette inline, so the surface needs !important. */
+#docsify-swagger-ui .swagger-ui .highlight-code > .microlight,
+#docsify-swagger-ui .swagger-ui .opblock pre.microlight {
+    background: var( --swagger-surface-alt ) !important;
+    padding: 0.85rem 1rem !important;
+    text-shadow: none;
+}
+
+#docsify-swagger-ui .swagger-ui .microlight code,
+#docsify-swagger-ui .swagger-ui .microlight span {
+    color: inherit;
+}
+
+/* Schema rows are tables too, but row separators only add noise there. */
+#docsify-swagger-ui .swagger-ui .model-box table tbody tr td,
+#docsify-swagger-ui .swagger-ui table.model tbody tr td {
+    border-bottom: 0;
+    padding: 0.2rem 0.5rem 0.2rem 0;
+}
+
+#docsify-swagger-ui .swagger-ui .model,
+#docsify-swagger-ui .swagger-ui .model-title {
+    color: var( --swagger-heading );
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.85rem;
+}
+
+#docsify-swagger-ui .swagger-ui .model-toggle:after {
+    opacity: 0.5;
+}
+
+#docsify-swagger-ui .swagger-ui .prop-type {
+    color: var( --swagger-accent );
+}
+
+#docsify-swagger-ui .swagger-ui section.models {
+    background: var( --swagger-surface );
+    border: 1px solid var( --swagger-border );
+    border-radius: var( --swagger-radius );
+    box-shadow: var( --swagger-shadow );
+    margin: 2rem 0 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+#docsify-swagger-ui .swagger-ui section.models.is-open h4 {
+    border-bottom: 1px solid var( --swagger-border );
+    margin: 0;
+}
+
+#docsify-swagger-ui .swagger-ui section.models h4 {
+    background: var( --swagger-surface-alt );
+    color: var( --swagger-heading );
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.75rem 0.9rem;
+}
+
+#docsify-swagger-ui .swagger-ui section.models .model-container {
+    background: var( --swagger-surface );
+    border-radius: 0;
+    border-bottom: 1px solid var( --swagger-border );
+    margin: 0;
+    padding: 0.35rem 0.9rem;
+}
+
+#docsify-swagger-ui .swagger-ui section.models .model-container:last-of-type {
+    border-bottom: 0;
+}
+
+#docsify-swagger-ui .swagger-ui section.models .model-container:hover {
+    background: var( --swagger-surface-alt );
+}
+
+#docsify-swagger-ui .swagger-ui .model-box {
+    background: transparent;
+    padding: 0;
+}
+
+/* Live responses */
+
+#docsify-swagger-ui .swagger-ui .responses-table .response-col_description__inner div.renderedMarkdown p {
+    color: var( --swagger-text );
+    font-family: inherit;
+    font-size: 0.85rem;
+}
+
+#docsify-swagger-ui .swagger-ui .request-url pre {
+    background: var( --swagger-surface-alt );
+    border: 1px solid var( --swagger-border );
+    border-radius: 8px;
+    color: var( --swagger-heading );
+    font-size: 0.82rem;
+}
+
+#docsify-swagger-ui .swagger-ui .live-responses-table .response-col_status {
+    font-size: 0.95rem;
+}
+
+#docsify-swagger-ui .swagger-ui .errors-wrapper {
+    border-radius: var( --swagger-radius );
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+    #docsify-swagger-ui .swagger-ui .btn,
+    #docsify-swagger-ui .swagger-ui .opblock {
+        transition: none;
+    }
+}
+
+@media screen and ( max-width: 768px ) {
+    /* Docsify drops the content max-width here; stay inside the viewport. */
+    #docsify-swagger-ui {
+        max-width: none;
+        width: 100%;
+    }
+
+    #docsify-swagger-ui .swagger-ui .info .title {
+        font-size: 1.3rem;
+    }
+
+    #docsify-swagger-ui .swagger-ui .opblock .opblock-summary-control {
+        flex-wrap: wrap;
+    }
+}

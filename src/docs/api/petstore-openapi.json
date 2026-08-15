@@ -1,0 +1,73 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Pet Store — API de exemplo",
+    "version": "1.0.0",
+    "description": "Uma especificação OpenAPI local para demonstrar o Swagger UI."
+  },
+  "servers": [
+    {
+      "url": "https://petstore3.swagger.io/api/v3",
+      "description": "Servidor público de demonstração"
+    }
+  ],
+  "paths": {
+    "/pet/{petId}": {
+      "get": {
+        "summary": "Busca um pet pelo identificador",
+        "operationId": "getPetById",
+        "parameters": [
+          {
+            "name": "petId",
+            "in": "path",
+            "required": true,
+            "description": "Identificador numérico do pet",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pet encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pet não encontrado"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Pet": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Rex"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["available", "pending", "sold"]
+          }
+        }
+      }
+    }
+  }
+}

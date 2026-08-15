@@ -10,31 +10,49 @@
 
 **Docsify Docs** is a WordPress plugin that allows you to create and manage documentation using [Docsify](https://docsify.js.org/), leveraging `.md` files directly within your project. It's ideal for technical projects, user manuals, or any kind of versioned technical documentation.
 
-![image](https://github.com/user-attachments/assets/00a41df7-1b7b-4987-80b7-6fbea95e2070)
+![The documentation page rendered by Docsify Docs](.github/screenshots/documentation.png)
 
-![image](https://github.com/user-attachments/assets/ef471225-3e9b-4690-81e1-2c201924685a)
+Markdown pages carrying an OpenAPI specification are rendered as interactive API documentation:
+
+![API documentation rendered with Swagger UI](.github/screenshots/swagger.png)
 
 ## 📁 Project Structure
 
 ```
 docsify-docs/
-├── src/
-│   ├── Access.php                    # Who may read the documentation
-│   ├── Docs.php                      # Where the .md files live and how they are reached
-│   ├── FileServer.php                # Serves the .md files under the access rule
-│   ├── Hardening.php                 # Deny rule written next to the .md files
-│   ├── assets/vendor/                # Bundled Docsify, Mermaid and D3 — no CDN
-│   ├── docs/                         # Sample Markdown copied to the docs folder on activation
-│   └── templates/docsify-docs.php    # Template file responsible for rendering Docsify
+├── docsify-docs.php                  # Plugin header, PSR-4 autoloader, activation hooks
+├── config.php                        # Version and the DOCSIFYDOCS_DEFAULT_* constants
+├── uninstall.php                     # Removes the options and the deny rule; docs are kept
+├── languages/                        # Translation files (pt_BR included)
+└── src/
+    ├── Access.php                    # Who may read the documentation
+    ├── Activator.php                 # Defaults, sample docs, rewrite rules
+    ├── Deactivator.php               # Cleans the rewrite rules
+    ├── Admin.php                     # Settings page: access control and appearance
+    ├── Admin/DocsPage.php            # Create, rename and reset the documentation page
+    ├── Core.php                      # Wires every piece on plugins_loaded
+    ├── Docs.php                      # Where the .md files live and how they are reached
+    ├── FileServer.php                # Serves the files under the access rule
+    ├── Hardening.php                 # Deny rule written next to the .md files
+    ├── Migration.php                 # Carries data over from the old wp-docsify
+    ├── Template.php                  # Registers the template and isolates theme styles
+    ├── assets/                       # Plugin styles and scripts
+    │   └── vendor/                   # Docsify, Swagger UI, Mermaid and D3 — no CDN
+    ├── docs/                         # Sample Markdown copied to the docs folder on activation
+    └── templates/                    # docsify-docs.php and access-denied.php
 ```
 
 ## 🧩 Features
 
-- Direct integration of Docsify into WordPress
+- Direct integration of Docsify into WordPress, rendered by a custom page template
 - Reads `.md` files from `wp-content/uploads/docsify-docs/`, or from any path you point it at
 - Access control that covers the files, not only the page
-- Automatic rendering via a custom template
-- Simple and database-independent
+- Interactive API documentation with Swagger UI, from an OpenAPI file in the docs folder
+- Docsify plugins included: full-text search, pagination, copy code, collapsible sidebar
+- Mermaid diagrams with zoom and pan
+- Logo picked from the Media Library, theme color and repository link set from the admin
+- Every script and style bundled with the plugin — no external CDN requests
+- Simple and database-independent — no Composer required
 
 ## 🛠️ Installation
 
@@ -44,9 +62,9 @@ docsify-docs/
 wp-content/plugins/docsify-docs/
 ```
 
-2. Activate the plugin through the WordPress admin panel.
+2. Activate the plugin through the WordPress admin panel. The sample documentation is copied to `wp-content/uploads/docsify-docs/` on activation.
 
-3. Create a page in WordPress and select the **"Docsify Docs"** template, or generate it from the **Docsify Docs** admin menu.
+3. Open **Docsify Docs** in the admin menu and click **Generate documentation page**, or create a page yourself and select the **"Docsify Docs"** template.
 
 ## ✍️ How to Use
 
@@ -56,9 +74,25 @@ wp-content/plugins/docsify-docs/
 wp-content/uploads/docsify-docs/
 ```
 
-2. The `README.md` file will be used as the documentation's home page.
+2. `README.md` is the home page, `_sidebar.md` builds the menu and `_navbar.md` the top bar.
 
-3. Customize Docsify behavior (menus, themes, etc.) directly in the `src/templates/docsify-docs.php` file.
+3. Adjust the logo, theme color and repository link under **Docsify Docs > Settings** — editing the plugin template is not needed, and changes there are lost on the next update.
+
+## ⚙️ Settings
+
+![The Docsify Docs settings screen](.github/screenshots/settings.png)
+
+Everything lives on a single screen under the **Docsify Docs** menu:
+
+| Section | Setting | What it does |
+|---|---|---|
+| Access Control | Enable Restriction | Limits the documentation to logged-in users |
+| Access Control | Allowed Roles | The roles allowed to read it |
+| Access Control | Protect Files | Serves the `.md` files through WordPress under the same rule |
+| Appearance | Logo | Picked from the Media Library |
+| Appearance | Theme Color | Accent color of the documentation and of the API reference |
+| Appearance | Repository URL | Adds a GitHub link in the Docsify toolbar |
+| Documentation Page | Generate / Page URL / Reset | Creates the page carrying the template, changes its URL, or replaces it |
 
 ## 🔒 Access Control
 
@@ -71,6 +105,18 @@ Docsify fetches every `.md` over the network, so restricting the page is not eno
 - only a fixed list of extensions is handed out, and paths that escape the documentation folder are refused.
 
 The endpoint is a rewrite rule, so it needs pretty permalinks. On plain permalinks the setting reports itself as inactive and the files fall back to direct URLs. On nginx, or any server that ignores `.htaccess`, add the equivalent deny for the documentation folder to your server configuration.
+
+## 🧪 API Documentation with Swagger UI
+
+Swagger UI is bundled locally with the plugin. In any Markdown page, add one link named `swagger`; it is replaced by the interactive API documentation:
+
+```md
+[swagger](api/openapi.json)
+```
+
+The relative path is resolved from the documentation folder and stays behind the same file protection as the Docsify page. JSON, YAML and YML specifications are supported, and an absolute URL can be used when the API hosts its own file.
+
+**Try it out** sends the request from the visitor's browser, so the API has to allow the documentation origin through CORS.
 
 ## 📂 Keeping the Docs Under Version Control
 

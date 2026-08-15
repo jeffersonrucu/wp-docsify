@@ -4,7 +4,7 @@ Tags:              documentation, docsify, markdown, docs, knowledge-base
 Requires at least: 5.9
 Tested up to:      7.0
 Requires PHP:      7.4
-Stable tag:        3.1.1
+Stable tag:        3.2.0
 License:           GPL-2.0+
 License URI:       https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -22,6 +22,7 @@ Docsify Docs embeds the [Docsify](https://docsify.js.org) documentation generato
 * Admin settings panel under the Docsify Docs menu
 * Custom logo picked from the Media Library
 * Docsify plugins included: full-text search, pagination, copy code, collapsible sidebar, Mermaid diagrams
+* Interactive API documentation with Swagger UI, from an OpenAPI file kept with the documentation
 * All scripts and styles bundled with the plugin — no external CDN requests
 * Documentation page isolated from theme and block styles
 * Documentation files stored in `wp-content/uploads/docsify-docs/` — survives plugin updates
@@ -100,6 +101,12 @@ With **Protect Files** enabled the folder does not have to be reachable by URL a
 
 == Changelog ==
 
+= 3.2.0 =
+* Added interactive API documentation with Swagger UI, bundled with the plugin. A Markdown page holding a link named `swagger` renders the specification it points at, so an API reference lives beside the rest of the documentation.
+* OpenAPI files in JSON, YAML and YML are served by the file endpoint, so a specification stays behind the same access rule as the documentation.
+* The API reference follows the theme color from the settings and the typography of the documentation, instead of the stock Swagger look.
+* Updated the README with the current admin screen, project structure and screenshots.
+
 = 3.1.1 =
 * Fixed a blank documentation page on sites running a page cache or a JavaScript optimizer. WP Rocket's "delay JavaScript execution" rewrites every script tag to a type the browser will not run, which docsify cannot survive, and a cached copy of the page is served before WordPress loads. The page now declares the constants WP Rocket, W3 Total Cache and LiteSpeed Cache check before touching a response.
 * Fixed a collapsed sidebar section disappearing from the menu. Docsify hides every non-anchor child of a collapsed item, which took plain-text group headings down with the list and left no way to reopen them.
@@ -140,6 +147,9 @@ With **Protect Files** enabled the folder does not have to be reachable by URL a
 * Initial release.
 
 == Upgrade Notice ==
+
+= 3.2.0 =
+Adds Swagger UI for API documentation. Nothing changes on existing documentation: the API reference only appears on pages that link to an OpenAPI file.
 
 = 3.1.1 =
 Recommended for anyone on 3.1.0, and required if your site runs a page cache or a JavaScript optimizer: the documentation page could render blank. After updating, purge your cache once so the stored copy of the page is dropped.

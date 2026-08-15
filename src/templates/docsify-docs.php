@@ -68,6 +68,19 @@ wp_enqueue_script( 'docsify-search', $docsifydocs_vendor . 'docsify/plugins/sear
 wp_enqueue_script( 'docsify-copy-code', $docsifydocs_vendor . 'docsify-copy-code/docsify-copy-code.min.js', [ 'docsify' ], DOCSIFYDOCS_VERSION, true );
 wp_enqueue_script( 'docsify-sidebar-collapse', $docsifydocs_vendor . 'docsify-sidebar-collapse/docsify-sidebar-collapse.min.js', [ 'docsify' ], DOCSIFYDOCS_VERSION, true );
 
+wp_enqueue_script( 'docsify-swagger-ui', $docsifydocs_vendor . 'docsify-swagger-ui/docsify-swagger-ui.js', [ 'docsify' ], DOCSIFYDOCS_VERSION, true );
+wp_add_inline_script(
+    'docsify-swagger-ui',
+    'window.docsifySwaggerUi = ' . wp_json_encode( [
+        'basePath'  => trailingslashit( $docsifydocs_docs_url ),
+        'bundleUrl' => $docsifydocs_vendor . 'swagger-ui/swagger-ui-bundle.js',
+        'styleUrl'  => $docsifydocs_vendor . 'swagger-ui/swagger-ui.css',
+        'themeUrl'  => DOCSIFYDOCS_URL . 'src/assets/swagger-ui.css',
+        'accent'    => $docsifydocs_theme_color,
+    ] ) . ';',
+    'before'
+);
+
 // The UMD build exposes window.mermaid; docsify-mermaid then triggers mermaid.run().
 wp_enqueue_script( 'mermaid', $docsifydocs_vendor . 'mermaid/mermaid.min.js', [], DOCSIFYDOCS_VERSION, true );
 wp_add_inline_script( 'mermaid', 'mermaid.initialize({ startOnLoad: false });', 'after' );
