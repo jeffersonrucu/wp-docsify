@@ -27,6 +27,8 @@ class FileServer {
         'mmd'      => 'text/plain; charset=UTF-8',
         'txt'      => 'text/plain; charset=UTF-8',
         'json'     => 'application/json',
+        'yaml'     => 'application/yaml; charset=UTF-8',
+        'yml'      => 'application/yaml; charset=UTF-8',
         'csv'      => 'text/csv; charset=UTF-8',
         'svg'      => 'image/svg+xml',
         'png'      => 'image/png',

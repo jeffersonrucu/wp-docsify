@@ -11,6 +11,7 @@ shipped with the plugin. All licenses are GPL-compatible.
 | docsify-sidebar-collapse | 1.3.5 | MIT | https://www.npmjs.com/package/docsify-sidebar-collapse |
 | docsify-mermaid | 2.0.1 | ISC | https://www.npmjs.com/package/docsify-mermaid |
 | docsify-mermaid-zoom | 3.0.0 | MIT | https://www.npmjs.com/package/docsify-mermaid-zoom |
+| swagger-ui | 5.32.11 | Apache-2.0 | https://www.npmjs.com/package/swagger-ui-dist |
 | mermaid | 11.16.0 | MIT | https://www.npmjs.com/package/mermaid |
 | d3 | 7.9.0 | ISC | https://www.npmjs.com/package/d3 |
 
