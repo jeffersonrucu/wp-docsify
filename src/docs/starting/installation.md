@@ -1,6 +1,6 @@
 # 🚀 Instalação
 
-> Um guia rápido para instalar e configurar localmente do projeto.
+> Um guia rápido para instalar e configurar o projeto localmente.
 
 ---
 
@@ -10,5 +10,5 @@ Antes de começar, verifique se você tem instalado:
 
 - **Git**
 - **Docker**
-- **Node.js** >= 18.x****
+- **Node.js** >= 18.x
 - **npm** ou **Yarn**
