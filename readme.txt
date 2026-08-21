@@ -4,7 +4,7 @@ Tags:              documentation, docsify, markdown, docs, knowledge-base
 Requires at least: 5.9
 Tested up to:      7.0
 Requires PHP:      7.4
-Stable tag:        3.2.0
+Stable tag:        3.3.0
 License:           GPL-2.0+
 License URI:       https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -100,6 +100,9 @@ With **Protect Files** enabled the folder does not have to be reachable by URL a
 3. Admin settings panel under the Docsify Docs menu.
 
 == Changelog ==
+
+= 3.3.0 =
+* Fixed the default documentation directory: with `DOCSIFYDOCS_DOCS_DIR` undefined the files are now read from the plugin's own `src/docs` folder instead of the uploads directory, so documentation versioned with the project is served as is. Set `DOCSIFYDOCS_DOCS_DIR` to the uploads path to keep the previous behaviour.
 
 = 3.2.0 =
 * Added interactive API documentation with Swagger UI, bundled with the plugin. A Markdown page holding a link named `swagger` renders the specification it points at, so an API reference lives beside the rest of the documentation.

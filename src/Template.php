@@ -48,6 +48,7 @@ class Template {
      * @param mixed                $post_type
      * @return array<string,string>
      */
+    // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter -- signature fixed by the theme_page_templates filter
     public function includeTemplate( $post_templates, $wp_theme, $post, $post_type ): array {
         $post_templates['template-docsify-docs.php'] = 'Docsify Docs';
         return $post_templates;
@@ -92,6 +93,7 @@ class Template {
     private function optOutOfOptimization(): void {
         foreach ( [ 'DONOTCACHEPAGE', 'DONOTROCKETOPTIMIZE', 'DONOTMINIFY', 'DONOTCACHEOBJECT', 'DONOTASYNCCSS' ] as $constant ) {
             if ( ! defined( $constant ) ) {
+                // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.VariableConstantNameFound -- constants owned by third-party cache plugins
                 define( $constant, true );
             }
         }

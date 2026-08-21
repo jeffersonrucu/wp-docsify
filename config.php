@@ -15,7 +15,18 @@ define( 'DOCSIFYDOCS_URL', plugin_dir_url( __FILE__ ) );
  * Guarded so wp-config.php can set them first, which is how a project keeps its
  * own defaults under version control instead of only in the database.
  */
-defined( 'DOCSIFYDOCS_DEFAULT_THEME_COLOR' ) or define( 'DOCSIFYDOCS_DEFAULT_THEME_COLOR', '#2674D9' );
-defined( 'DOCSIFYDOCS_DEFAULT_IS_RESTRICTED' ) or define( 'DOCSIFYDOCS_DEFAULT_IS_RESTRICTED', true );
-defined( 'DOCSIFYDOCS_DEFAULT_ALLOWED_ROLES' ) or define( 'DOCSIFYDOCS_DEFAULT_ALLOWED_ROLES', [ 'administrator' ] );
-defined( 'DOCSIFYDOCS_DEFAULT_PROTECT_FILES' ) or define( 'DOCSIFYDOCS_DEFAULT_PROTECT_FILES', true );
+if ( ! defined( 'DOCSIFYDOCS_DEFAULT_THEME_COLOR' ) ) {
+    define( 'DOCSIFYDOCS_DEFAULT_THEME_COLOR', '#2674D9' );
+}
+
+if ( ! defined( 'DOCSIFYDOCS_DEFAULT_IS_RESTRICTED' ) ) {
+    define( 'DOCSIFYDOCS_DEFAULT_IS_RESTRICTED', true );
+}
+
+if ( ! defined( 'DOCSIFYDOCS_DEFAULT_ALLOWED_ROLES' ) ) {
+    define( 'DOCSIFYDOCS_DEFAULT_ALLOWED_ROLES', [ 'administrator' ] );
+}
+
+if ( ! defined( 'DOCSIFYDOCS_DEFAULT_PROTECT_FILES' ) ) {
+    define( 'DOCSIFYDOCS_DEFAULT_PROTECT_FILES', true );
+}

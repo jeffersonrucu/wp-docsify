@@ -21,14 +21,17 @@ class Activator {
 
     private static function setDefaultOptions(): void {
         if ( false === get_option( 'docsify_docs_options' ) ) {
-            add_option( 'docsify_docs_options', [
-                'is_restricted' => DOCSIFYDOCS_DEFAULT_IS_RESTRICTED,
-                'allowed_roles' => DOCSIFYDOCS_DEFAULT_ALLOWED_ROLES,
-                'protect_files' => DOCSIFYDOCS_DEFAULT_PROTECT_FILES,
-                'logo_id'       => 0,
-                'theme_color'   => DOCSIFYDOCS_DEFAULT_THEME_COLOR,
-                'repo_url'      => '',
-            ] );
+            add_option(
+                'docsify_docs_options',
+                [
+                    'is_restricted' => DOCSIFYDOCS_DEFAULT_IS_RESTRICTED,
+                    'allowed_roles' => DOCSIFYDOCS_DEFAULT_ALLOWED_ROLES,
+                    'protect_files' => DOCSIFYDOCS_DEFAULT_PROTECT_FILES,
+                    'logo_id'       => 0,
+                    'theme_color'   => DOCSIFYDOCS_DEFAULT_THEME_COLOR,
+                    'repo_url'      => '',
+                ]
+            );
         }
     }
 

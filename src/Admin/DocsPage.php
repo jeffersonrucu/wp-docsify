@@ -39,15 +39,17 @@ class DocsPage {
      * Recovers a page created before this feature existed, or by hand.
      */
     private function findByTemplate(): ?\WP_Post {
-        $pages = get_posts( [
-            'post_type'   => 'page',
-            'post_status' => [ 'publish', 'draft', 'private' ],
-            'numberposts' => 1,
-            // phpcs:ignore WordPress.DB.SlowDBQuery -- admin-only lookup for a single settings screen
-            'meta_key'    => '_wp_page_template',
-            // phpcs:ignore WordPress.DB.SlowDBQuery -- admin-only lookup for a single settings screen
-            'meta_value'  => self::TEMPLATE,
-        ] );
+        $pages = get_posts(
+            [
+                'post_type'   => 'page',
+                'post_status' => [ 'publish', 'draft', 'private' ],
+                'numberposts' => 1,
+                // phpcs:ignore WordPress.DB.SlowDBQuery -- admin-only lookup for a single settings screen
+                'meta_key'    => '_wp_page_template',
+                // phpcs:ignore WordPress.DB.SlowDBQuery -- admin-only lookup for a single settings screen
+                'meta_value'  => self::TEMPLATE,
+            ]
+        );
 
         if ( empty( $pages ) ) {
             return null;
@@ -84,13 +86,15 @@ class DocsPage {
     }
 
     private function redirect( string $notice ): void {
-        wp_safe_redirect( add_query_arg(
-            [
-                'page'              => 'docsify-docs',
-                'docsify_docs_page' => $notice,
-            ],
-            admin_url( 'admin.php' )
-        ) );
+        wp_safe_redirect(
+            add_query_arg(
+                [
+                    'page'              => 'docsify-docs',
+                    'docsify_docs_page' => $notice,
+                ],
+                admin_url( 'admin.php' )
+            )
+        );
         exit;
     }
 
@@ -104,10 +108,13 @@ class DocsPage {
             return false;
         }
 
-        $result = wp_update_post( [
-            'ID'        => $page->ID,
-            'post_name' => $slug,
-        ], true );
+        $result = wp_update_post(
+            [
+                'ID'        => $page->ID,
+                'post_name' => $slug,
+            ],
+            true
+        );
 
         return ! is_wp_error( $result );
     }
@@ -117,16 +124,20 @@ class DocsPage {
             return true;
         }
 
-        $page_id = wp_insert_post( [
-            'post_title'   => __( 'Documentation', 'docsify-docs' ),
-            'post_name'    => 'docs',
-            'post_status'  => 'publish',
-            'post_type'    => 'page',
-            'post_content' => '',
-            'meta_input'   => [ '_wp_page_template' => self::TEMPLATE ],
-        ] );
+        // The second argument makes WordPress return a WP_Error instead of 0.
+        $page_id = wp_insert_post(
+            [
+                'post_title'   => __( 'Documentation', 'docsify-docs' ),
+                'post_name'    => 'docs',
+                'post_status'  => 'publish',
+                'post_type'    => 'page',
+                'post_content' => '',
+                'meta_input'   => [ '_wp_page_template' => self::TEMPLATE ],
+            ],
+            true
+        );
 
-        if ( is_wp_error( $page_id ) || ! $page_id ) {
+        if ( is_wp_error( $page_id ) ) {
             return false;
         }
 
@@ -154,27 +165,27 @@ class DocsPage {
                 ?>
             </p>
             <form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"
-                  style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:16px;">
+                    style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:16px;">
                 <?php wp_nonce_field( self::ACTION ); ?>
                 <input type="hidden" name="action" value="<?php echo esc_attr( self::ACTION ); ?>">
                 <input type="hidden" name="mode" value="slug">
                 <label for="docsify-docs-slug"><?php esc_html_e( 'Page URL', 'docsify-docs' ); ?></label>
                 <code><?php echo esc_html( trailingslashit( home_url() ) ); ?></code>
                 <input type="text" id="docsify-docs-slug" name="slug" class="regular-text"
-                       value="<?php echo esc_attr( $page->post_name ); ?>" required>
+                        value="<?php echo esc_attr( $page->post_name ); ?>" required>
                 <?php submit_button( __( 'Save URL', 'docsify-docs' ), 'secondary', 'submit', false ); ?>
             </form>
 
             <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
                 <a href="<?php echo esc_url( (string) get_permalink( $page ) ); ?>" class="button button-primary"
-                   target="_blank" rel="noopener">
+                    target="_blank" rel="noopener">
                     <?php esc_html_e( 'View page', 'docsify-docs' ); ?>
                 </a>
                 <a href="<?php echo esc_url( (string) get_edit_post_link( $page->ID ) ); ?>" class="button">
                     <?php esc_html_e( 'Edit page', 'docsify-docs' ); ?>
                 </a>
                 <form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"
-                      onsubmit="return confirm('<?php echo esc_js( __( 'This moves the current page to the trash and creates a new one. Continue?', 'docsify-docs' ) ); ?>');">
+                        onsubmit="return confirm('<?php echo esc_js( __( 'This moves the current page to the trash and creates a new one. Continue?', 'docsify-docs' ) ); ?>');">
                     <?php wp_nonce_field( self::ACTION ); ?>
                     <input type="hidden" name="action" value="<?php echo esc_attr( self::ACTION ); ?>">
                     <input type="hidden" name="mode" value="reset">
