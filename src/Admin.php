@@ -25,9 +25,12 @@ class Admin {
         add_action( 'admin_enqueue_scripts', [ $this, 'enqueueAssets' ] );
 
         // The deny rule next to the files has to follow the setting that asks for it.
-        add_action( 'update_option_docsify_docs_options', function (): void {
-            ( new Hardening() )->sync();
-        } );
+        add_action(
+            'update_option_docsify_docs_options',
+            function (): void {
+                ( new Hardening() )->sync();
+            }
+        );
     }
 
     public function enqueueAssets( string $hook ): void {
@@ -45,10 +48,14 @@ class Admin {
             true
         );
 
-        wp_localize_script( 'docsify-docs-admin', 'docsifyDocsAdmin', [
-            'frameTitle'  => __( 'Select the documentation logo', 'docsify-docs' ),
-            'frameButton' => __( 'Use this logo', 'docsify-docs' ),
-        ] );
+        wp_localize_script(
+            'docsify-docs-admin',
+            'docsifyDocsAdmin',
+            [
+                'frameTitle'  => __( 'Select the documentation logo', 'docsify-docs' ),
+                'frameButton' => __( 'Use this logo', 'docsify-docs' ),
+            ]
+        );
     }
 
     public function addMenu(): void {
@@ -70,7 +77,6 @@ class Admin {
             'docsify-docs',
             [ $this, 'renderSettingsPage' ]
         );
-
     }
 
     public function registerSettings(): void {
@@ -80,13 +86,13 @@ class Admin {
             [ 'sanitize_callback' => [ $this, 'sanitizeOptions' ] ]
         );
 
-        add_settings_section( 'docsify_docs_access', __( 'Access Control', 'docsify-docs' ), null, 'docsify-docs' );
+        add_settings_section( 'docsify_docs_access', __( 'Access Control', 'docsify-docs' ), '__return_null', 'docsify-docs' );
 
         add_settings_field( 'is_restricted', __( 'Enable Restriction', 'docsify-docs' ), [ $this, 'renderIsRestricted' ], 'docsify-docs', 'docsify_docs_access' );
         add_settings_field( 'allowed_roles', __( 'Allowed Roles', 'docsify-docs' ), [ $this, 'renderAllowedRoles' ], 'docsify-docs', 'docsify_docs_access' );
         add_settings_field( 'protect_files', __( 'Protect Files', 'docsify-docs' ), [ $this, 'renderProtectFiles' ], 'docsify-docs', 'docsify_docs_access' );
 
-        add_settings_section( 'docsify_docs_appearance', __( 'Appearance', 'docsify-docs' ), null, 'docsify-docs' );
+        add_settings_section( 'docsify_docs_appearance', __( 'Appearance', 'docsify-docs' ), '__return_null', 'docsify-docs' );
 
         add_settings_field( 'logo_id', __( 'Logo', 'docsify-docs' ), [ $this, 'renderLogo' ], 'docsify-docs', 'docsify_docs_appearance' );
         add_settings_field( 'theme_color', __( 'Theme Color', 'docsify-docs' ), [ $this, 'renderThemeColor' ], 'docsify-docs', 'docsify_docs_appearance' );
@@ -95,6 +101,7 @@ class Admin {
 
     /**
      * @param mixed $input
+     * @return array<string,mixed>
      */
     public function sanitizeOptions( $input ): array {
         $output = [];
@@ -139,8 +146,8 @@ class Admin {
             ?>
             <label style="display:block;margin-bottom:5px;">
                 <input type="checkbox"
-                       name="docsify_docs_options[allowed_roles][]"
-                       value="<?php echo esc_attr( $role_key ); ?>"
+                        name="docsify_docs_options[allowed_roles][]"
+                        value="<?php echo esc_attr( $role_key ); ?>"
                     <?php checked( $checked ); ?>>
                 <?php echo esc_html( translate_user_role( $role_data['name'] ) ); ?>
             </label>
@@ -185,8 +192,8 @@ class Admin {
         <div class="docsify-docs-logo" data-docsify-docs-logo>
             <input type="hidden" name="docsify_docs_options[logo_id]" value="<?php echo esc_attr( (string) $logo_id ); ?>">
             <img class="docsify-docs-logo__preview"
-                 style="display:block;max-width:220px;max-height:80px;margin-bottom:8px;"
-                 alt=""
+                style="display:block;max-width:220px;max-height:80px;margin-bottom:8px;"
+                alt=""
                 <?php if ( $logo_url ) : ?>
                     src="<?php echo esc_url( $logo_url ); ?>"
                 <?php else : ?>
@@ -222,10 +229,10 @@ class Admin {
         $url     = $options['repo_url'] ?? '';
         ?>
         <input type="url"
-               name="docsify_docs_options[repo_url]"
-               value="<?php echo esc_attr( $url ); ?>"
-               class="regular-text"
-               placeholder="https://github.com/username/repo">
+                name="docsify_docs_options[repo_url]"
+                value="<?php echo esc_attr( $url ); ?>"
+                class="regular-text"
+                placeholder="https://github.com/username/repo">
         <p class="description"><?php esc_html_e( 'Optional. Adds a GitHub link in the Docsify toolbar.', 'docsify-docs' ); ?></p>
         <?php
     }
