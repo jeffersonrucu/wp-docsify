@@ -71,13 +71,15 @@ wp_enqueue_script( 'docsify-sidebar-collapse', $docsifydocs_vendor . 'docsify-si
 wp_enqueue_script( 'docsify-swagger-ui', $docsifydocs_vendor . 'docsify-swagger-ui/docsify-swagger-ui.js', [ 'docsify' ], DOCSIFYDOCS_VERSION, true );
 wp_add_inline_script(
     'docsify-swagger-ui',
-    'window.docsifySwaggerUi = ' . wp_json_encode( [
-        'basePath'  => trailingslashit( $docsifydocs_docs_url ),
-        'bundleUrl' => $docsifydocs_vendor . 'swagger-ui/swagger-ui-bundle.js',
-        'styleUrl'  => $docsifydocs_vendor . 'swagger-ui/swagger-ui.css',
-        'themeUrl'  => DOCSIFYDOCS_URL . 'src/assets/swagger-ui.css',
-        'accent'    => $docsifydocs_theme_color,
-    ] ) . ';',
+    'window.docsifySwaggerUi = ' . wp_json_encode(
+        [
+            'basePath'  => trailingslashit( $docsifydocs_docs_url ),
+            'bundleUrl' => $docsifydocs_vendor . 'swagger-ui/swagger-ui-bundle.js',
+            'styleUrl'  => $docsifydocs_vendor . 'swagger-ui/swagger-ui.css',
+            'themeUrl'  => DOCSIFYDOCS_URL . 'src/assets/swagger-ui.css',
+            'accent'    => $docsifydocs_theme_color,
+        ]
+    ) . ';',
     'before'
 );
 

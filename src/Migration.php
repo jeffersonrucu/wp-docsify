@@ -11,13 +11,13 @@ if ( ! defined( 'WPINC' ) ) {
  */
 class Migration {
 
-    private const FLAG          = 'docsify_docs_renamed';
-    private const FLAT_FLAG     = 'docsify_docs_flat_docs';
-    private const OLD_OPTION    = 'wp_docsify_options';
-    private const OLD_DIR       = 'wp-docsify';
-    private const OLD_TEMPLATE  = 'template-wp-docsify.php';
-    private const NEW_TEMPLATE  = 'template-docsify-docs.php';
-    private const OLD_LOCALES   = [ 'pt_BR', 'en_US' ];
+    private const FLAG         = 'docsify_docs_renamed';
+    private const FLAT_FLAG    = 'docsify_docs_flat_docs';
+    private const OLD_OPTION   = 'wp_docsify_options';
+    private const OLD_DIR      = 'wp-docsify';
+    private const OLD_TEMPLATE = 'template-wp-docsify.php';
+    private const NEW_TEMPLATE = 'template-docsify-docs.php';
+    private const OLD_LOCALES  = [ 'pt_BR', 'en_US' ];
 
     public function run(): void {
         $this->runRename();
@@ -123,16 +123,18 @@ class Migration {
     }
 
     private function migratePageTemplates(): void {
-        $pages = get_posts( [
-            'post_type'   => 'page',
-            'post_status' => 'any',
-            'numberposts' => -1,
-            'fields'      => 'ids',
-            // phpcs:ignore WordPress.DB.SlowDBQuery -- one-off migration, guarded by an option flag
-            'meta_key'    => '_wp_page_template',
-            // phpcs:ignore WordPress.DB.SlowDBQuery -- one-off migration, guarded by an option flag
-            'meta_value'  => self::OLD_TEMPLATE,
-        ] );
+        $pages = get_posts(
+            [
+                'post_type'   => 'page',
+                'post_status' => 'any',
+                'numberposts' => -1,
+                'fields'      => 'ids',
+                // phpcs:ignore WordPress.DB.SlowDBQuery -- one-off migration, guarded by an option flag
+                'meta_key'    => '_wp_page_template',
+                // phpcs:ignore WordPress.DB.SlowDBQuery -- one-off migration, guarded by an option flag
+                'meta_value'  => self::OLD_TEMPLATE,
+            ]
+        );
 
         foreach ( $pages as $page_id ) {
             update_post_meta( $page_id, '_wp_page_template', self::NEW_TEMPLATE );

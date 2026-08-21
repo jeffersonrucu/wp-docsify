@@ -21,22 +21,24 @@ if ( ! defined( 'WPINC' ) ) {
     die;
 }
 
-spl_autoload_register( function ( $class ) {
-    $prefix   = 'DocsifyDocs\\';
-    $base_dir = __DIR__ . '/src/';
-    $len      = strlen( $prefix );
+spl_autoload_register(
+    function ( $class_name ) {
+        $prefix   = 'DocsifyDocs\\';
+        $base_dir = __DIR__ . '/src/';
+        $len      = strlen( $prefix );
 
-    if ( strncmp( $prefix, $class, $len ) !== 0 ) {
-        return;
+        if ( strncmp( $prefix, $class_name, $len ) !== 0 ) {
+                return;
+        }
+
+        $relative_class = substr( $class_name, $len );
+        $file           = $base_dir . str_replace( '\\', '/', $relative_class ) . '.php';
+
+        if ( file_exists( $file ) ) {
+            require $file;
+        }
     }
-
-    $relative_class = substr( $class, $len );
-    $file           = $base_dir . str_replace( '\\', '/', $relative_class ) . '.php';
-
-    if ( file_exists( $file ) ) {
-        require $file;
-    }
-} );
+);
 
 require_once __DIR__ . '/config.php';
 
@@ -47,7 +49,10 @@ use DocsifyDocs\Core;
 register_activation_hook( __FILE__, [ Activator::class, 'activate' ] );
 register_deactivation_hook( __FILE__, [ Deactivator::class, 'deactivate' ] );
 
-add_action( 'plugins_loaded', function () {
-    $plugin = new Core();
-    $plugin->run();
-} );
+add_action(
+    'plugins_loaded',
+    function () {
+        $plugin = new Core();
+        $plugin->run();
+    }
+);

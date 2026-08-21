@@ -151,7 +151,10 @@ class FileServer {
         $size      = filesize( $path );
 
         // A page cache would hand a restricted file to whoever asks for it next.
-        defined( 'DONOTCACHEPAGE' ) or define( 'DONOTCACHEPAGE', true );
+        if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- constant owned by third-party cache plugins
+            define( 'DONOTCACHEPAGE', true );
+        }
 
         // A compression buffer would rewrite the body and leave Content-Length lying.
         while ( ob_get_level() > 0 ) {
@@ -184,7 +187,10 @@ class FileServer {
     }
 
     private function abort( int $code ): void {
-        defined( 'DONOTCACHEPAGE' ) or define( 'DONOTCACHEPAGE', true );
+        if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- constant owned by third-party cache plugins
+            define( 'DONOTCACHEPAGE', true );
+        }
 
         while ( ob_get_level() > 0 ) {
             ob_end_clean();
