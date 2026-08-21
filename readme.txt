@@ -4,7 +4,7 @@ Tags:              documentation, docsify, markdown, docs, knowledge-base
 Requires at least: 5.9
 Tested up to:      7.0
 Requires PHP:      7.4
-Stable tag:        3.3.0
+Stable tag:        3.3.1
 License:           GPL-2.0+
 License URI:       https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -100,6 +100,11 @@ With **Protect Files** enabled the folder does not have to be reachable by URL a
 3. Admin settings panel under the Docsify Docs menu.
 
 == Changelog ==
+
+= 3.3.1 =
+* Fixed the documentation page created from the settings screen reporting success when WordPress refused the insert. The error was never returned, so the failure passed silently and the settings screen pointed at a page that does not exist.
+* Fixed a fatal error risk on the settings screen: the Access Control and Appearance sections were registered without a render callback.
+* Added an automated pipeline running on every pull request, checking syntax against PHP 7.4 to 8.4, the WordPress Coding Standards, static analysis and the consistency of the version headers.
 
 = 3.3.0 =
 * Fixed the default documentation directory: with `DOCSIFYDOCS_DOCS_DIR` undefined the files are now read from the plugin's own `src/docs` folder instead of the uploads directory, so documentation versioned with the project is served as is. Set `DOCSIFYDOCS_DOCS_DIR` to the uploads path to keep the previous behaviour.
