@@ -3,3 +3,9 @@
 /.gitattributes export-ignore
 /.claude        export-ignore
 /.github        export-ignore
+/bin            export-ignore
+/tests          export-ignore
+/composer.json  export-ignore
+/composer.lock  export-ignore
+/phpcs.xml.dist export-ignore
+/phpstan.neon.dist export-ignore

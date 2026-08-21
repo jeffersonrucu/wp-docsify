@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<ruleset name="Docsify Docs">
+    <description>Coding standards for the Docsify Docs plugin.</description>
+
+    <file>.</file>
+
+    <exclude-pattern>/vendor/*</exclude-pattern>
+    <exclude-pattern>/node_modules/*</exclude-pattern>
+    <exclude-pattern>/src/assets/*</exclude-pattern>
+    <!-- Build tooling: runs on the CLI, not inside WordPress. -->
+    <exclude-pattern>/bin/*</exclude-pattern>
+    <exclude-pattern>/tests/*</exclude-pattern>
+
+    <arg name="extensions" value="php"/>
+    <arg name="basepath" value="."/>
+    <arg name="colors"/>
+    <arg name="parallel" value="8"/>
+    <arg value="sp"/>
+
+    <config name="minimum_wp_version" value="5.9"/>
+    <config name="testVersion" value="7.4-"/>
+
+    <rule ref="WordPress-Core"/>
+    <rule ref="WordPress-Extra"/>
+    <rule ref="PHPCompatibilityWP"/>
+
+    <!--
+        The plugin follows PSR-4 with modern PHP syntax, so the WPCS rules that
+        assume the classic WordPress file/function layout are turned off here.
+        Everything about security, correctness and i18n stays enabled.
+    -->
+    <rule ref="Generic.WhiteSpace.DisallowSpaceIndent">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Universal.Arrays.DisallowShortArraySyntax">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Universal.Operators.DisallowShortTernary">
+        <severity>0</severity>
+    </rule>
+    <rule ref="WordPress.Files.FileName">
+        <severity>0</severity>
+    </rule>
+    <rule ref="WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid">
+        <severity>0</severity>
+    </rule>
+    <rule ref="WordPress.PHP.YodaConditions">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="WordPress.WP.I18n">
+        <properties>
+            <property name="text_domain" type="array">
+                <element value="docsify-docs"/>
+            </property>
+        </properties>
+    </rule>
+
+    <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+        <properties>
+            <property name="prefixes" type="array">
+                <element value="docsify_docs"/>
+                <element value="docsifydocs"/>
+                <element value="DocsifyDocs"/>
+            </property>
+        </properties>
+    </rule>
+</ruleset>

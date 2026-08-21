@@ -1,0 +1,16 @@
+includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+
+parameters:
+    level: 6
+    paths:
+        - docsify-docs.php
+        - config.php
+        - uninstall.php
+        - src
+    excludePaths:
+        - src/assets/*
+    bootstrapFiles:
+        - tests/phpstan-bootstrap.php
+    scanFiles:
+        - vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
