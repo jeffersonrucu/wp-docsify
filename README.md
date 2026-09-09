@@ -37,6 +37,8 @@ docsify-docs/
     ├── Migration.php                 # Carries data over from the old wp-docsify
     ├── Template.php                  # Registers the template and isolates theme styles
     ├── assets/                       # Plugin styles and scripts
+    │   ├── docsify-guide.js          # Step-by-step guide player
+    │   ├── guide.css                 # Guide styles
     │   └── vendor/                   # Docsify, Swagger UI, Mermaid and D3 — no CDN
     ├── docs/                         # Sample Markdown copied to the docs folder on activation
     └── templates/                    # docsify-docs.php and access-denied.php
@@ -48,6 +50,7 @@ docsify-docs/
 - Reads `.md` files from `wp-content/uploads/docsify-docs/`, or from any path you point it at
 - Access control that covers the files, not only the page
 - Interactive API documentation with Swagger UI, from an OpenAPI file in the docs folder
+- Step-by-step guides: a numbered list becomes a walkthrough, one step at a time, with the screenshot of each step
 - Docsify plugins included: full-text search, pagination, copy code, collapsible sidebar
 - Mermaid diagrams with zoom and pan
 - Logo picked from the Media Library, theme color and repository link set from the admin
@@ -105,6 +108,28 @@ Docsify fetches every `.md` over the network, so restricting the page is not eno
 - only a fixed list of extensions is handed out, and paths that escape the documentation folder are refused.
 
 The endpoint is a rewrite rule, so it needs pretty permalinks. On plain permalinks the setting reports itself as inactive and the files fall back to direct URLs. On nginx, or any server that ignores `.htaccess`, add the equivalent deny for the documentation folder to your server configuration.
+
+## 🪜 Step-by-step Guides
+
+A page whose numbered list is preceded by `<!-- docsify-guide -->` is rendered as a walkthrough — one step at a time, with **Previous** / **Next**, a **Play** button that advances on its own, the arrow keys, and a **See every step** view for reading it in one go. The screenshot of a step opens enlarged on click.
+
+```md
+# Create an author
+
+> Dashboard → Users → Add New User
+
+<!-- docsify-guide -->
+
+1. In the sidebar, click **Users**.
+
+   ![step 1](media/create-author/01.png)
+
+2. Click **Add New User**.
+
+   ![step 2](media/create-author/02.png)
+```
+
+The marker is an HTML comment and the steps are an ordinary Markdown list, so the page still reads as a numbered list with images when the script is unavailable, and the search plugin indexes every step. Images follow the same access rule as the rest of the documentation.
 
 ## 🧪 API Documentation with Swagger UI
 
