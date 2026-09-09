@@ -4,7 +4,7 @@ Tags:              documentation, docsify, markdown, docs, knowledge-base
 Requires at least: 5.9
 Tested up to:      7.0
 Requires PHP:      7.4
-Stable tag:        3.4.2
+Stable tag:        3.4.3
 License:           GPL-2.0+
 License URI:       https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -101,6 +101,9 @@ With **Protect Files** enabled the folder does not have to be reachable by URL a
 3. Admin settings panel under the Docsify Docs menu.
 
 == Changelog ==
+
+= 3.4.3 =
+* Fixed a guide screenshot growing to several screens of scrolling. A tall crop — the right column of an editor, a form column — was stretched to the width of the content area, so a 208x892 capture rendered 3900 pixels tall. Screenshots now keep their own size up to the column width and stop at 520 pixels tall; nothing is upscaled, so a small crop is sharp instead of blurry, and the lightbox still answers the detail.
 
 = 3.4.2 =
 * Fixed a documentation page vanishing from the menu. Every sidebar group was configured to start collapsed, so opening a page outside a group — the home page, for instance — hid the pages inside it, and a group written as plain text shows no indicator that it can be opened. First-level groups now start open, which is Docsify's own default; deeper groups still collapse.
