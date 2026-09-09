@@ -1,5 +1,7 @@
 - [Início](/)
 - API
   - [Swagger UI — exemplo](/api/exemplo.md)
+- Guias
+  - [Passo a passo — exemplo](/guides/exemplo.md)
 - Começando
   - [Instalação](/starting/installation.md)

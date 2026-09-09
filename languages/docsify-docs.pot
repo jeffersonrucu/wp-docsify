@@ -282,3 +282,33 @@ msgstr ""
 #: src/FileServer.php:184
 msgid "Documentation file not found."
 msgstr ""
+
+#: src/templates/docsify-docs.php
+msgid "Play"
+msgstr ""
+
+#: src/templates/docsify-docs.php
+msgid "Pause"
+msgstr ""
+
+#: src/templates/docsify-docs.php
+msgid "See every step"
+msgstr ""
+
+#: src/templates/docsify-docs.php
+msgid "One step at a time"
+msgstr ""
+
+#. translators: 1: current step number, 2: total of steps
+#: src/templates/docsify-docs.php
+msgid "Step %1$s of %2$s"
+msgstr ""
+
+#. translators: %s: total of steps
+#: src/templates/docsify-docs.php
+msgid "%s steps"
+msgstr ""
+
+#: src/templates/docsify-docs.php
+msgid "Enlarge image"
+msgstr ""

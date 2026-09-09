@@ -9,7 +9,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Template {
 
     /** Styles the documentation page is allowed to load. */
-    private const KEPT_STYLES = [ 'docsify-core', 'docsify-vue', 'docsify-docs' ];
+    private const KEPT_STYLES = [ 'docsify-core', 'docsify-vue', 'docsify-docs', 'docsify-guide' ];
 
     public function run(): void {
         $this->filters();

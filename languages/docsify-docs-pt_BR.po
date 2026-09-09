@@ -250,3 +250,33 @@ msgstr "Você não tem permissão para ler esta documentação."
 #: src/FileServer.php
 msgid "Documentation file not found."
 msgstr "Arquivo de documentação não encontrado."
+
+#: src/templates/docsify-docs.php
+msgid "Play"
+msgstr "Reproduzir"
+
+#: src/templates/docsify-docs.php
+msgid "Pause"
+msgstr "Pausar"
+
+#: src/templates/docsify-docs.php
+msgid "See every step"
+msgstr "Ver todos os passos"
+
+#: src/templates/docsify-docs.php
+msgid "One step at a time"
+msgstr "Um passo por vez"
+
+#. translators: 1: current step number, 2: total of steps
+#: src/templates/docsify-docs.php
+msgid "Step %1$s of %2$s"
+msgstr "Passo %1$s de %2$s"
+
+#. translators: %s: total of steps
+#: src/templates/docsify-docs.php
+msgid "%s steps"
+msgstr "%s passos"
+
+#: src/templates/docsify-docs.php
+msgid "Enlarge image"
+msgstr "Ampliar imagem"

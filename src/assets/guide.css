@@ -1,0 +1,177 @@
+.dg-guide {
+    --dg-accent: var( --theme-color, #2674d9 );
+    --dg-line: #e3e7ee;
+    margin: 2rem 0 0;
+}
+
+.markdown-section .dg-bar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    background: #fff;
+}
+
+.markdown-section .dg-button,
+.markdown-section .dg-step__zoom {
+    outline-offset: 2px;
+}
+
+.markdown-section .dg-button:hover,
+.markdown-section .dg-step__zoom:hover {
+    outline: 0;
+}
+
+.markdown-section .dg-button {
+    padding: 0.5rem 1rem;
+    border: 1px solid var( --dg-line );
+    border-radius: 999px;
+    background: #fff;
+    color: inherit;
+    font: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.markdown-section .dg-button:not( .dg-button--primary ):hover:not( :disabled ) {
+    border-color: var( --dg-accent );
+    background: #f2f6fd;
+}
+
+.markdown-section .dg-button--primary:hover:not( :disabled ) {
+    background: color-mix( in srgb, var( --dg-accent ) 84%, #000 );
+}
+
+.markdown-section .dg-button:focus-visible {
+    outline: 2px solid var( --dg-accent );
+    outline-offset: 2px;
+}
+
+.markdown-section .dg-button--primary {
+    border-color: var( --dg-accent );
+    background: var( --dg-accent );
+    color: #fff;
+    font-weight: 600;
+}
+
+.markdown-section .dg-button:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+
+.markdown-section .dg-track {
+    flex: 1 1 120px;
+    height: 5px;
+    border-radius: 999px;
+    background: var( --dg-line );
+    overflow: hidden;
+}
+
+.markdown-section .dg-track > i {
+    display: block;
+    height: 100%;
+    background: var( --dg-accent );
+    transition: width 0.25s ease;
+}
+
+.markdown-section .dg-counter {
+    color: #6b7280;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.markdown-section .dg-steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.markdown-section .dg-step {
+    margin: 0 0 1.25rem;
+    padding: 1.25rem;
+    border: 1px solid var( --dg-line );
+    border-radius: 14px;
+    background: #fff;
+}
+
+.markdown-section .dg-step__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.markdown-section .dg-step__number {
+    flex: 0 0 1.9rem;
+    height: 1.9rem;
+    border-radius: 50%;
+    background: var( --dg-accent );
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.9rem;
+    text-align: center;
+}
+
+.markdown-section .dg-step__text > :first-child {
+    margin-top: 0.15rem;
+}
+
+.markdown-section .dg-step__text > :last-child {
+    margin-bottom: 0;
+}
+
+.markdown-section .dg-step__shot {
+    margin: 1rem 0 0;
+}
+
+.markdown-section .dg-step__shot img {
+    display: block;
+    width: 100%;
+    border: 1px solid var( --dg-line );
+    border-radius: 10px;
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+    .markdown-section .dg-track > i {
+        transition: none;
+    }
+}
+
+.markdown-section .dg-step__zoom {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    cursor: zoom-in;
+}
+
+.markdown-section .dg-step__zoom:focus-visible {
+    outline: 2px solid var( --dg-accent );
+    outline-offset: 3px;
+}
+
+.dg-lightbox {
+    max-width: 100vw;
+    max-height: 100vh;
+    padding: 0;
+    border: 0;
+    background: none;
+}
+
+.dg-lightbox::backdrop {
+    background: rgba( 15, 23, 42, 0.82 );
+}
+
+.dg-lightbox img {
+    display: block;
+    max-width: 96vw;
+    max-height: 94vh;
+    border-radius: 8px;
+    cursor: zoom-out;
+}

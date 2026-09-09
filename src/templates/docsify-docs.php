@@ -20,6 +20,7 @@ $docsifydocs_vendor = DOCSIFYDOCS_URL . 'src/assets/vendor/';
 wp_enqueue_style( 'docsify-core', $docsifydocs_vendor . 'docsify/themes/core.min.css', [], DOCSIFYDOCS_VERSION );
 wp_enqueue_style( 'docsify-vue', $docsifydocs_vendor . 'docsify/themes/vue.css', [ 'docsify-core' ], DOCSIFYDOCS_VERSION );
 wp_enqueue_style( 'docsify-docs', DOCSIFYDOCS_URL . 'src/assets/style.css', [ 'docsify-vue' ], DOCSIFYDOCS_VERSION );
+wp_enqueue_style( 'docsify-guide', DOCSIFYDOCS_URL . 'src/assets/guide.css', [ 'docsify-docs' ], DOCSIFYDOCS_VERSION );
 
 // Config inline script — must run before docsify.js
 $docsifydocs_config = [
@@ -67,6 +68,29 @@ wp_enqueue_script( 'docsify-pagination', $docsifydocs_vendor . 'docsify-paginati
 wp_enqueue_script( 'docsify-search', $docsifydocs_vendor . 'docsify/plugins/search.min.js', [ 'docsify' ], DOCSIFYDOCS_VERSION, true );
 wp_enqueue_script( 'docsify-copy-code', $docsifydocs_vendor . 'docsify-copy-code/docsify-copy-code.min.js', [ 'docsify' ], DOCSIFYDOCS_VERSION, true );
 wp_enqueue_script( 'docsify-sidebar-collapse', $docsifydocs_vendor . 'docsify-sidebar-collapse/docsify-sidebar-collapse.min.js', [ 'docsify' ], DOCSIFYDOCS_VERSION, true );
+
+wp_enqueue_script( 'docsify-guide', DOCSIFYDOCS_URL . 'src/assets/docsify-guide.js', [ 'docsify' ], DOCSIFYDOCS_VERSION, true );
+wp_add_inline_script(
+    'docsify-guide',
+    'window.docsifyGuide = ' . wp_json_encode(
+        [
+            'labels' => [
+                'previous' => __( 'Previous', 'docsify-docs' ),
+                'next'     => __( 'Next', 'docsify-docs' ),
+                'play'     => __( 'Play', 'docsify-docs' ),
+                'pause'    => __( 'Pause', 'docsify-docs' ),
+                'all'      => __( 'See every step', 'docsify-docs' ),
+                'one'      => __( 'One step at a time', 'docsify-docs' ),
+                /* translators: 1: current step number, 2: total of steps */
+                'counter'  => __( 'Step %1$s of %2$s', 'docsify-docs' ),
+                /* translators: %s: total of steps */
+                'steps'    => __( '%s steps', 'docsify-docs' ),
+                'zoom'     => __( 'Enlarge image', 'docsify-docs' ),
+            ],
+        ]
+    ) . ';',
+    'before'
+);
 
 wp_enqueue_script( 'docsify-swagger-ui', $docsifydocs_vendor . 'docsify-swagger-ui/docsify-swagger-ui.js', [ 'docsify' ], DOCSIFYDOCS_VERSION, true );
 wp_add_inline_script(
