@@ -128,9 +128,18 @@
     margin: 1rem 0 0;
 }
 
+/*
+ * A tall crop -- a screenshot of a sidebar, a form column -- was stretched to
+ * the column width and grew to several screens of scrolling. Cap the height and
+ * stop upscaling; the lightbox is there for the detail.
+ */
 .markdown-section .dg-step__shot img {
     display: block;
-    width: 100%;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 520px;
+    margin: 0 auto;
     border: 1px solid var( --dg-line );
     border-radius: 10px;
 }
