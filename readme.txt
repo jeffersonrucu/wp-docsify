@@ -4,7 +4,7 @@ Tags:              documentation, docsify, markdown, docs, knowledge-base
 Requires at least: 5.9
 Tested up to:      7.0
 Requires PHP:      7.4
-Stable tag:        3.3.1
+Stable tag:        3.4.0
 License:           GPL-2.0+
 License URI:       https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -23,6 +23,7 @@ Docsify Docs embeds the [Docsify](https://docsify.js.org) documentation generato
 * Custom logo picked from the Media Library
 * Docsify plugins included: full-text search, pagination, copy code, collapsible sidebar, Mermaid diagrams
 * Interactive API documentation with Swagger UI, from an OpenAPI file kept with the documentation
+* Step-by-step guides: a numbered list marked with `<!-- docsify-guide -->` is rendered one step at a time, with the screenshot of each step
 * All scripts and styles bundled with the plugin — no external CDN requests
 * Documentation page isolated from theme and block styles
 * Documentation files stored in `wp-content/uploads/docsify-docs/` — survives plugin updates
@@ -101,6 +102,11 @@ With **Protect Files** enabled the folder does not have to be reachable by URL a
 
 == Changelog ==
 
+= 3.4.0 =
+* Added step-by-step guides: a numbered list preceded by `<!-- docsify-guide -->` is rendered as a walkthrough — one step at a time, with Previous/Next, a Play button that advances on its own, the arrow keys, and a "See every step" view. The marker is an HTML comment and the steps stay an ordinary Markdown list, so the page still reads as a numbered list with images when the script is unavailable, and the search plugin indexes every step.
+* Guide screenshots open enlarged in a dialog, closed with Escape or a click, reachable by keyboard.
+* Widened the documentation content area from 72 characters to 1100 pixels, so a screenshot is readable without opening it. It still shrinks with the viewport.
+
 = 3.3.1 =
 * Fixed the documentation page created from the settings screen reporting success when WordPress refused the insert. The error was never returned, so the failure passed silently and the settings screen pointed at a page that does not exist.
 * Fixed a fatal error risk on the settings screen: the Access Control and Appearance sections were registered without a render callback.
@@ -155,6 +161,9 @@ With **Protect Files** enabled the folder does not have to be reachable by URL a
 * Initial release.
 
 == Upgrade Notice ==
+
+= 3.4.0 =
+Adds step-by-step guides. Existing documentation renders as before, except for the wider content area, which affects every page.
 
 = 3.2.0 =
 Adds Swagger UI for API documentation. Nothing changes on existing documentation: the API reference only appears on pages that link to an OpenAPI file.
