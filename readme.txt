@@ -4,7 +4,7 @@ Tags:              documentation, docsify, markdown, docs, knowledge-base
 Requires at least: 5.9
 Tested up to:      7.0
 Requires PHP:      7.4
-Stable tag:        3.4.1
+Stable tag:        3.4.2
 License:           GPL-2.0+
 License URI:       https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -101,6 +101,9 @@ With **Protect Files** enabled the folder does not have to be reachable by URL a
 3. Admin settings panel under the Docsify Docs menu.
 
 == Changelog ==
+
+= 3.4.2 =
+* Fixed a documentation page vanishing from the menu. Every sidebar group was configured to start collapsed, so opening a page outside a group — the home page, for instance — hid the pages inside it, and a group written as plain text shows no indicator that it can be opened. First-level groups now start open, which is Docsify's own default; deeper groups still collapse.
 
 = 3.4.1 =
 * Fixed a logo picked from the Media Library disappearing from the sidebar when the file is an SVG carrying only a `viewBox`, with no width or height of its own: the image collapsed to zero height. The logo now has a fixed height and keeps its aspect ratio, and a square logo is still not stretched.
