@@ -4,7 +4,7 @@ Tags:              documentation, docsify, markdown, docs, knowledge-base
 Requires at least: 5.9
 Tested up to:      7.0
 Requires PHP:      7.4
-Stable tag:        3.4.0
+Stable tag:        3.4.1
 License:           GPL-2.0+
 License URI:       https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -101,6 +101,9 @@ With **Protect Files** enabled the folder does not have to be reachable by URL a
 3. Admin settings panel under the Docsify Docs menu.
 
 == Changelog ==
+
+= 3.4.1 =
+* Fixed a logo picked from the Media Library disappearing from the sidebar when the file is an SVG carrying only a `viewBox`, with no width or height of its own: the image collapsed to zero height. The logo now has a fixed height and keeps its aspect ratio, and a square logo is still not stretched.
 
 = 3.4.0 =
 * Added step-by-step guides: a numbered list preceded by `<!-- docsify-guide -->` is rendered as a walkthrough — one step at a time, with Previous/Next, a Play button that advances on its own, the arrow keys, and a "See every step" view. The marker is an HTML comment and the steps stay an ordinary Markdown list, so the page still reads as a numbered list with images when the script is unavailable, and the search plugin indexes every step.

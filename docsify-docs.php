@@ -6,7 +6,7 @@
  * Plugin Name:       Docsify Docs
  * Plugin URI:        https://github.com/jeffersonrucu/WP_Docsify
  * Description:       Integrate Docsify documentation into WordPress using a custom page template with role-based access control and admin settings.
- * Version:           3.4.0
+ * Version:           3.4.1
  * Requires at least: 5.9
  * Requires PHP:      7.4
  * Author:            Jefferson Oliveira, Studio STG

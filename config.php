@@ -4,7 +4,7 @@ if ( ! defined( 'WPINC' ) ) {
     die;
 }
 
-define( 'DOCSIFYDOCS_VERSION', '3.4.0' );
+define( 'DOCSIFYDOCS_VERSION', '3.4.1' );
 define( 'DOCSIFYDOCS_NAME', 'Docsify Docs' );
 define( 'DOCSIFYDOCS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DOCSIFYDOCS_URL', plugin_dir_url( __FILE__ ) );
