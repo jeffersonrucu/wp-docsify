@@ -11,11 +11,14 @@ a:hover {
     padding: 0 14px !important;
 }
 
-/* width:auto keeps square logos from being stretched by the sidebar width. */
+/*
+ * height fixed with width:auto keeps square logos from being stretched, and an
+ * SVG carrying only a viewBox from collapsing to zero height.
+ */
 .app-name img {
     width: auto !important;
     max-width: 100%;
-    max-height: 40px;
+    height: 40px;
     padding: 0 30px 0 0 !important;
 }
 
