@@ -1,3 +1,7 @@
+:root {
+    --content-max-width: min( 1100px, 100% );
+}
+
 a:hover {
     text-decoration: none !important;
 }
