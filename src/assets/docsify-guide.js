@@ -108,8 +108,10 @@
             step.hidden = mode === 'step' && index !== current - 1;
         } );
 
-        guide.querySelector( '.dg-track > i' ).style.width =
-            ( mode === 'step' ? current / total : 1 ) * 100 + '%';
+        Array.prototype.forEach.call( guide.querySelectorAll( '.dg-track b' ), function ( fill, index ) {
+            fill.style.transition = '';
+            fill.style.width      = mode !== 'step' || index < current ? '100%' : '0';
+        } );
         guide.querySelector( '[data-dg=previous]' ).disabled = mode !== 'step' || current === 1;
         guide.querySelector( '[data-dg=next]' ).disabled     = mode !== 'step' || current === total;
         guide.querySelector( '[data-dg=all]' ).textContent   = mode === 'step'
@@ -128,9 +130,12 @@
         window.clearInterval( timer );
         timer = null;
 
-        var fill = guide && guide.querySelector( '.dg-track > i' );
+        var fill = guide && guide.querySelectorAll( '.dg-track b' )[ Number( guide.dataset.current ) - 1 ];
 
         if ( fill ) {
+            // Freezes the part where it is: a running transition would otherwise
+            // fill it to the end while the guide is paused.
+            fill.style.width      = window.getComputedStyle( fill ).width;
             fill.style.transition = '';
         }
 
@@ -142,21 +147,21 @@
     }
 
     /**
-     * The bar crawls to the next step over the delay, so the reader sees how
-     * much of the step is left instead of waiting for a jump.
+     * The part of the step being played fills over the delay, so the reader
+     * sees how much of it is left instead of waiting for a jump.
      */
-    function tick( guide, current, total ) {
+    function tick( guide, current ) {
         if ( CALM.matches ) {
             return;
         }
 
-        var fill = guide.querySelector( '.dg-track > i' );
+        var fill = guide.querySelectorAll( '.dg-track b' )[ current - 1 ];
 
         fill.style.transition = 'none';
-        fill.style.width      = ( current - 1 ) / total * 100 + '%';
+        fill.style.width      = '0';
         void fill.offsetWidth;
         fill.style.transition = 'width ' + DELAY + 'ms linear';
-        fill.style.width      = current / total * 100 + '%';
+        fill.style.width      = '100%';
     }
 
     function play( guide ) {
@@ -164,7 +169,7 @@
 
         guide.querySelector( '[data-dg=play]' ).textContent = label( 'pause', 'Pause' );
         render( guide, 'step', 1 );
-        tick( guide, 1, total );
+        tick( guide, 1 );
 
         timer = window.setInterval( function () {
             var current = Number( guide.dataset.current );
@@ -175,7 +180,7 @@
             }
 
             render( guide, 'step', current + 1 );
-            tick( guide, current + 1, total );
+            tick( guide, current + 1 );
         }, DELAY );
     }
 
@@ -202,7 +207,12 @@
 
         var track = document.createElement( 'div' );
         track.className = 'dg-track';
-        track.append( document.createElement( 'i' ) );
+
+        Array.prototype.forEach.call( list.children, function () {
+            var part = document.createElement( 'i' );
+            part.append( document.createElement( 'b' ) );
+            track.append( part );
+        } );
 
         var counter = document.createElement( 'span' );
         counter.className = 'dg-counter';

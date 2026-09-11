@@ -111,7 +111,7 @@ The endpoint is a rewrite rule, so it needs pretty permalinks. On plain permalin
 
 ## 🪜 Step-by-step Guides
 
-A page whose numbered list is preceded by `<!-- docsify-guide -->` is rendered as a walkthrough — one step at a time, with **Previous** / **Next**, a **Play** button that advances on its own — the progress bar crawls to the next step, so the wait is visible —, the arrow keys, and a **See every step** view for reading it in one go. The screenshot of a step opens enlarged on click.
+A page whose numbered list is preceded by `<!-- docsify-guide -->` is rendered as a walkthrough — one step at a time, with **Previous** / **Next**, a **Play** button that advances on its own — the progress bar carries one part per step, and the part being played fills over the wait —, the arrow keys, and a **See every step** view for reading it in one go. The screenshot of a step opens enlarged on click.
 
 ```md
 # Create an author

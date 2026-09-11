@@ -64,15 +64,23 @@
 }
 
 .markdown-section .dg-track {
+    display: flex;
     flex: 1 1 120px;
+    gap: 4px;
     height: 5px;
+}
+
+.markdown-section .dg-track > i {
+    flex: 1;
+    height: 100%;
     border-radius: 999px;
     background: var( --dg-line );
     overflow: hidden;
 }
 
-.markdown-section .dg-track > i {
+.markdown-section .dg-track b {
     display: block;
+    width: 0;
     height: 100%;
     background: var( --dg-accent );
     transition: width 0.25s ease;
@@ -145,7 +153,7 @@
 }
 
 @media ( prefers-reduced-motion: reduce ) {
-    .markdown-section .dg-track > i {
+    .markdown-section .dg-track b {
         transition: none;
     }
 }
