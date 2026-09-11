@@ -4,7 +4,8 @@
     var config = window.docsifyGuide || {};
     var labels = config.labels || {};
     var MARKER = 'docsify-guide';
-    var DELAY  = 3200;
+    var DELAY  = 2000;
+    var CALM   = window.matchMedia( '(prefers-reduced-motion: reduce)' );
     var timer  = null;
 
     function label( key, fallback ) {
@@ -127,6 +128,12 @@
         window.clearInterval( timer );
         timer = null;
 
+        var fill = guide && guide.querySelector( '.dg-track > i' );
+
+        if ( fill ) {
+            fill.style.transition = '';
+        }
+
         var play = guide && guide.querySelector( '[data-dg=play]' );
 
         if ( play ) {
@@ -134,11 +141,30 @@
         }
     }
 
+    /**
+     * The bar crawls to the next step over the delay, so the reader sees how
+     * much of the step is left instead of waiting for a jump.
+     */
+    function tick( guide, current, total ) {
+        if ( CALM.matches ) {
+            return;
+        }
+
+        var fill = guide.querySelector( '.dg-track > i' );
+
+        fill.style.transition = 'none';
+        fill.style.width      = ( current - 1 ) / total * 100 + '%';
+        void fill.offsetWidth;
+        fill.style.transition = 'width ' + DELAY + 'ms linear';
+        fill.style.width      = current / total * 100 + '%';
+    }
+
     function play( guide ) {
         var total = guide.querySelectorAll( '.dg-step' ).length;
 
         guide.querySelector( '[data-dg=play]' ).textContent = label( 'pause', 'Pause' );
         render( guide, 'step', 1 );
+        tick( guide, 1, total );
 
         timer = window.setInterval( function () {
             var current = Number( guide.dataset.current );
@@ -149,6 +175,7 @@
             }
 
             render( guide, 'step', current + 1 );
+            tick( guide, current + 1, total );
         }, DELAY );
     }
 
