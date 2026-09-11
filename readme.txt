@@ -4,7 +4,7 @@ Tags:              documentation, docsify, markdown, docs, knowledge-base
 Requires at least: 5.9
 Tested up to:      7.0
 Requires PHP:      7.4
-Stable tag:        3.5.0
+Stable tag:        3.6.0
 License:           GPL-2.0+
 License URI:       https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -101,6 +101,9 @@ With **Protect Files** enabled the folder does not have to be reachable by URL a
 3. Admin settings panel under the Docsify Docs menu.
 
 == Changelog ==
+
+= 3.6.0 =
+* The guide progress bar is now split into one part per step, and the part of the step being played fills over the delay. Where the guide is and how much of the step is left are read at a glance, which a single continuous bar only hinted at.
 
 = 3.5.0 =
 * The Play button now shows how much of the step is left: the progress bar crawls to the next mark over the delay instead of standing still and jumping when the step changes. Under `prefers-reduced-motion` it keeps jumping.
