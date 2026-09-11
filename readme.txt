@@ -4,7 +4,7 @@ Tags:              documentation, docsify, markdown, docs, knowledge-base
 Requires at least: 5.9
 Tested up to:      7.0
 Requires PHP:      7.4
-Stable tag:        3.4.3
+Stable tag:        3.5.0
 License:           GPL-2.0+
 License URI:       https://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -101,6 +101,10 @@ With **Protect Files** enabled the folder does not have to be reachable by URL a
 3. Admin settings panel under the Docsify Docs menu.
 
 == Changelog ==
+
+= 3.5.0 =
+* The Play button now shows how much of the step is left: the progress bar crawls to the next mark over the delay instead of standing still and jumping when the step changes. Under `prefers-reduced-motion` it keeps jumping.
+* Shortened the Play delay from 3.2 to 2 seconds, so a walkthrough no longer feels stalled between steps.
 
 = 3.4.3 =
 * Fixed a guide screenshot growing to several screens of scrolling. A tall crop — the right column of an editor, a form column — was stretched to the width of the content area, so a 208x892 capture rendered 3900 pixels tall. Screenshots now keep their own size up to the column width and stop at 520 pixels tall; nothing is upscaled, so a small crop is sharp instead of blurry, and the lightbox still answers the detail.
