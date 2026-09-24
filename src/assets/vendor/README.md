@@ -14,6 +14,7 @@ shipped with the plugin. All licenses are GPL-compatible.
 | swagger-ui | 5.32.11 | Apache-2.0 | https://www.npmjs.com/package/swagger-ui-dist |
 | mermaid | 11.16.0 | MIT | https://www.npmjs.com/package/mermaid |
 | d3 | 7.9.0 | ISC | https://www.npmjs.com/package/d3 |
+| Source Sans 3, Roboto Mono (`docsify/themes/fonts/`, latin, variable) | 5.3.0 | OFL-1.1 | https://www.npmjs.com/package/@fontsource-variable/source-sans-3, https://www.npmjs.com/package/@fontsource-variable/roboto-mono |
 
 Files are taken verbatim from each package's published `dist/`. To update one,
 download the same path from `https://cdn.jsdelivr.net/npm/<package>@<version>/`
@@ -24,6 +25,9 @@ Notes:
 - docsify 5 moved from `lib/` to `dist/` and split the theme into
   `themes/core.min.css` plus add-ons; `themes/vue.css` is the add-on that keeps
   the v4 look.
+- `themes/vue.css` is the one file not taken verbatim: its Google Fonts
+  `@import` is replaced by `@font-face` rules pointing at `themes/fonts/`.
+  Reapply that after updating docsify.
 - `mermaid.min.js` is the UMD build, which assigns `globalThis.mermaid`. The ESM
   build is not used because it resolves sibling chunks at runtime.
 - `d3` is required by docsify-mermaid-zoom, not by mermaid itself.
